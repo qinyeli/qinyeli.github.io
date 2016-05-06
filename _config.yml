@@ -24,3 +24,5 @@ kramdown:
   hard_wrap: false
 highlighter: rouge
 #markdown: redcarpet
+
+disqus: qinyeli-github-page
