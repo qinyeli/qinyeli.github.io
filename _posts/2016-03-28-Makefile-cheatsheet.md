@@ -1,8 +1,7 @@
 ---
 layout: post
 title:  "Makefile Cheatsheet"
-date:   2016-03-28
-categories: Makefile cheatsheet
+categories: makefile cheatsheet
 ---
 
 # Makefile Cheatsheet

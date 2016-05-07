@@ -1,7 +1,6 @@
 ---
 layout: post
 title:  "How to upgrade node"
-date:   2016-03-26
 categories: node note
 ---
 

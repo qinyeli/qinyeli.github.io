@@ -1,7 +1,6 @@
 ---
 layout: post
 title:  "How to do persistent storage in swift"
-date:   2016-03-26
 categories: swift
 ---
 
