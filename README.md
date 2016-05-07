@@ -9,6 +9,7 @@
 	* Related fild:
 		* node_modules/
 		* _layouts/default.html
+		* _includes/search.html
 		* _sass/_layout.scss
 		* js/jekyll-search.js
 		* search.json
