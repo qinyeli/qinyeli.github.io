@@ -1,0 +1,908 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>EECS482 Mid and Final Review</title>
+  <meta name="description" content="EECS482 Operating System – Review">
+
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="http://qinyeli.github.io//eecs482/cheatsheet/2016/04/20/eecs482-cheatsheet.html">
+  <link rel="alternate" type="application/rss+xml" title="Qinye Li (Sindy)" href="http://qinyeli.github.io//feed.xml">
+</head>
+
+
+  <body>
+
+    <header class="site-header">
+
+  <div class="wrapper">
+
+    <a class="site-title" href="/">Qinye Li (Sindy)</a>
+
+    <nav class="site-nav">
+      <a href="#" class="menu-icon">
+        <svg viewBox="0 0 18 15">
+          <path fill="#424242" d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.031C17.335,0,18,0.665,18,1.484L18,1.484z"/>
+          <path fill="#424242" d="M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0c0-0.82,0.665-1.484,1.484-1.484 h15.031C17.335,6.031,18,6.696,18,7.516L18,7.516z"/>
+          <path fill="#424242" d="M18,13.516C18,14.335,17.335,15,16.516,15H1.484C0.665,15,0,14.335,0,13.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.031C17.335,12.031,18,12.696,18,13.516L18,13.516z"/>
+        </svg>
+      </a>
+
+      <div class="trigger">
+        
+          
+          <a class="page-link" href="/about/">About</a>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      </div>
+    </nav>
+
+  </div>
+
+</header>
+
+
+    <div class="page-content">
+      <div class="wrapper">
+        <!-- Html Elements for Search -->
+<div id="search-container">
+  <input type="text" id="search-input" placeholder="search...">
+  <ul id="results-container"></ul>
+</div>
+
+<!-- Script pointing to jekyll-search.js -->
+<script src="/js/jekyll-search.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+  SimpleJekyllSearch({
+    searchInput: document.getElementById('search-input'),
+    resultsContainer: document.getElementById('results-container'),
+    json: '/search.json',
+    searchResultTemplate: '<li><a href="{url}" title="{desc}">{title}</a></li>',
+    noResultsText: 'No results found',
+    limit: 10,
+    fuzzy: false
+  })
+</script>
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title" itemprop="name headline">EECS482 Mid and Final Review</h1>
+    <p class="post-meta"><time datetime="2016-04-20T00:00:00-04:00" itemprop="datePublished">Apr 20, 2016</time></p>
+  </header>
+
+  <div class="post-content" itemprop="articleBody">
+    <h1 id="eecs482-operating-system----review">EECS482 Operating System – Review</h1>
+
+<h2 id="threads-and-concurrency">Threads and Concurrency</h2>
+<p><strong>Process</strong>: a program inexecution; an instance of a program.  <br />
+Formal definition: one or more threads in an address space</p>
+
+<p><strong>Thread</strong>: a sequence of execution instructions.</p>
+
+<p><strong>Concurrency</strong>: multiple threads active at on time.  <br />
+Thread is the unit of concurrency</p>
+
+<p><strong>Atomic operations</strong>  <br />
+atomic: happens in its entirety or not at all</p>
+
+<p><strong>Critical section</strong>: a section of code that need to be run atomically</p>
+
+<p><strong>Synchronization</strong></p>
+
+<ul>
+  <li>mutual exclusion (use lock/mutex)</li>
+  <li>
+    <p>ordering constraints (use cv)</p>
+  </li>
+  <li>high-level (provided by software): locks, monitors, semaphores  <br />
+(monitor = lock + cv associated with that lock)</li>
+  <li>low-level (provided by hardware): load/store, interrupt enable/disable, test&amp;set</li>
+</ul>
+
+<h3 id="monitors">Monitors</h3>
+
+<h4 id="lock-mutex">Lock/ Mutex</h4>
+<ul>
+  <li>Lock initialized to free</li>
+  <li>lock(): acquire lock before entering a critical section (waiting if needed)</li>
+  <li>unlock(): lease lock when exiting the critical section</li>
+</ul>
+
+<p><strong>Hand-over-hand locking</strong>: lock next node before releasing last node</p>
+
+<h4 id="cv">CV</h4>
+<ul>
+  <li>wait(): atomically relase lock, add the thread to the waiting list, go to seeep  <br />
+Note: wait() should always be used in a while loop</li>
+  <li>signal(): wake up one thead in the waiting list</li>
+  <li>braodcast(): wake up all threads in the waiting list</li>
+</ul>
+
+<p>Note: cv’s got no memory of signal() or broadcase() (Compare that to semaphore)</p>
+
+<h4 id="semaphore">Semaphore</h4>
+<ul>
+  <li>non-negative integer</li>
+  <li>down(): wait for semaphore value to become positive, then decrement</li>
+  <li>
+    <p>up(): increment the semophore value</p>
+  </li>
+  <li>For mutual exclusion
+    <ul>
+      <li>initialized to 1</li>
+      <li>down() to lock</li>
+      <li>critical section</li>
+      <li>up() to unlock</li>
+    </ul>
+  </li>
+  <li>For ordering constraints
+    <ul>
+      <li>initialized to 0</li>
+      <li>down() in waiting thread to wait</li>
+      <li>up() in waited thread to signal</li>
+    </ul>
+  </li>
+</ul>
+
+<h4 id="mesa-vs-hoare-monitors">Mesa vs. Hoare monitors</h4>
+<ul>
+  <li>Hoare monitors give special priority to the woken-up waitor</li>
+</ul>
+
+<h5 id="examples">Examples</h5>
+<ul>
+  <li>producer-consumer vending machine</li>
+  <li>woman/man toilet</li>
+  <li>thread safe queue</li>
+  <li>ping pong</li>
+  <li>reader-writer</li>
+</ul>
+
+<h3 id="thread-control-block-tcb">Thread Control Block (TCB)</h3>
+<p>Thread states:</p>
+
+<ul>
+  <li>running</li>
+  <li>waiting (for thread, mutex, or cv)</li>
+  <li>ready</li>
+</ul>
+
+<h3 id="deadlock">Deadlock</h3>
+<p>Necessary condition:</p>
+
+<ul>
+  <li>limited resources</li>
+  <li>no preemption</li>
+  <li>hold &amp; wait</li>
+  <li>circular dependency</li>
+</ul>
+
+<p>Strategies:</p>
+
+<ul>
+  <li>Ignore (proceed without the resources)</li>
+  <li>Detect and fix</li>
+  <li>Prevent
+    <ul>
+      <li>wait for all resource needed and acquire atomically</li>
+      <li>or if encouter a busy resource, release all resources and start over</li>
+    </ul>
+  </li>
+</ul>
+
+<h4 id="bankers-algorithm-keep-thread-in-a-safe-state">Banker’s algorithm: keep thread in a safe state</h4>
+<p>A state is safe if some sequence of thread exection allows each thread to obtian maximum needed resource to finish, and release the resource.  <br />
+In Banker’s Algorithm, a thread states its maximum resources requiremnet when it starts its task, but aquires and releases those resources incrementally.</p>
+
+<h2 id="scheduling">Scheduling</h2>
+<p>Goal:</p>
+
+<ul>
+  <li>Minimize average response time/ delay (from arrival to completion)</li>
+  <li>Maximize throughtput (the rate at which tasks are completed) of entire system</li>
+  <li>Maximize fairness</li>
+</ul>
+
+<h3 id="first-come-first-served-fcfs-fifo">First-come, first-served (FCFS) (FIFO)</h3>
+<ul>
+  <li>Simple, but not interactive</li>
+  <li>Short jobs get stuck behind long ones</li>
+  <li><strong>Minimum overhead</strong></li>
+  <li><strong>Longest average response time</strong></li>
+  <li>Good for equally sized tasks</li>
+</ul>
+
+<h3 id="round-robin">Round robin</h3>
+<p>Periodically preempt all jobs (yield) according to “time slice”</p>
+
+<ul>
+  <li>Good for interactive computing</li>
+  <li><strong>More context-switching overhead</strong></li>
+</ul>
+
+<h3 id="shortest-time-to-completion-first-stcf">Shortest time to completion first (STCF)</h3>
+<p>Preempt curret job if a shorter one arrives</p>
+
+<ul>
+  <li>Improve response time of short jobs</li>
+  <li>Hurts response time of long jobs</li>
+  <li><strong>Minimum average response time</strong></li>
+  <li>Starvation (long jobs get stuck behind short jobs)</li>
+  <li>Need knowledge of future</li>
+</ul>
+
+<h3 id="real-time-scheduling">Real-time scheduling</h3>
+<p>Earliest deadline first (EDF)</p>
+
+<ul>
+  <li>Require worst-case analysis</li>
+  <li>Might cause priority inversion =&gt; proprity donation (to task holding the lock)</li>
+</ul>
+
+<h2 id="address-spaces">Address Spaces</h2>
+<p>Abstractions:</p>
+
+<ol>
+  <li>Address independence (over different process)</li>
+  <li>Virtual/Larger memory</li>
+  <li>Protection/Controlled Sharing (Swap file/ Regular file backed mem)</li>
+</ol>
+
+<h3 id="address-translation-by-mmu">Address Translation (by MMU)</h3>
+<ul>
+  <li>Static translation: tranlate addresses before execution</li>
+  <li>Dynamic translation: translate addresses during execution</li>
+</ul>
+
+<h4 id="base--bounds-single-segmentation">Base &amp; Bounds (single segmentation)</h4>
+<ul>
+  <li>Load each process into contiguous region of physical memory</li>
+  <li>Change base and bounds registers to change address spaces</li>
+  <li>Hard to grow/shrink address space</li>
+  <li>Low hardward cost/ low overhead</li>
+  <li>No support for sharing data</li>
+  <li>A single address spaces cannot be larger than physical memory</li>
+  <li>External fragmentation (wasted memory between allocated regions)</li>
+</ul>
+
+<h4 id="segmentation-a-region-of-contiguous-memory">Segmentation (a region of contiguous memory)</h4>
+<ul>
+  <li>A virtual address takes the form (segment #, offset)</li>
+  <li>Different segments can have different protection</li>
+  <li>Pros: easy to share/ easy to grow in sparse address spaces</li>
+</ul>
+
+<h4 id="paging-fixed-size-of-segmentation">Paging (fixed size of segmentation)</h4>
+<ul>
+  <li>Allocate physical memory in pages (fixed-size units)</li>
+  <li>virtual address
+    <ul>
+      <li>vpn</li>
+      <li>offset</li>
+    </ul>
+  </li>
+  <li>Tranlation data store in page table</li>
+  <li>Pros: easy memory allocation/ easy to share/ easy to grow address space</li>
+  <li>Small page size =&gt; big offset</li>
+  <li>Large page size =&gt; internal fragmentation</li>
+</ul>
+
+<h4 id="multi-level-paging-slower-more-flexible">Multi-level Paging (slower, more flexible)</h4>
+<ul>
+  <li>Take less space becuase of allocation on need</li>
+  <li>Space efficient for sparse address spaces</li>
+  <li>Pros: easy memory allocation/ easy to share</li>
+</ul>
+
+<h3 id="caching">Caching</h3>
+
+<h4 id="tranlation-lookaside-buffer-tlb">Tranlation Lookaside Buffer (TLB)</h4>
+<ul>
+  <li>TLB caches PTEs</li>
+  <li>TLB must be reset on context switch</li>
+</ul>
+
+<h4 id="replacement-algorithms">Replacement Algorithms</h4>
+<ul>
+  <li>Random</li>
+  <li>FIFO</li>
+  <li>OPT (require knowledge of the future)</li>
+  <li>Second clock queue algorithm (substitution of LRU)</li>
+  <li>Evict first clean pages and then dirty pages to avoid disk access</li>
+</ul>
+
+<h4 id="eviction">Eviction</h4>
+<ul>
+  <li>Write back</li>
+  <li>Write through</li>
+</ul>
+
+<h4 id="deferring-work">Deferring Work</h4>
+<ul>
+  <li>avoid zero filling a page</li>
+  <li>avoid writing back (dirty page)</li>
+  <li>copy on write (make fork faster)</li>
+</ul>
+
+<h3 id="page-table">Page Table</h3>
+<ul>
+  <li>Page table for kernel address have to be stored in physical memory</li>
+  <li>Page table for user address coudl be stored in kernel’s virtual address space or in physical memory</li>
+  <li>Page table bits
+    <ul>
+      <li>valid</li>
+      <li>dirty</li>
+      <li>read</li>
+      <li>write</li>
+      <li>reference</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="kernel-vs-user-address-spaces">Kernel vs. User Address Spaces</h3>
+<p>protected data =&gt; tranlation data =&gt; mode bit =&gt; sys call =&gt; interrupt vector table</p>
+
+<ul>
+  <li>Kernel has its own address space</li>
+  <li>Most of the kernel’s virtual address space is pinned to physical memory</li>
+  <li>How does kernel access user’s address space?
+    <ul>
+      <li>Via physical address</li>
+      <li>Map kernel address space into every process’s address space
+        <ul>
+          <li>Trap to kernel does not change address spaces; it just allows computer to access both OS and user parts of the address space</li>
+          <li>Pro: page tables of processes that are not running can be swapped in to the disk</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>Mode bit: kernel mode/ user mode</li>
+  <li>Only kernel can execute privilege instructions provided by CPU</li>
+  <li>Who changes the mode bit?
+    <ul>
+      <li>kernel!</li>
+      <li>How to change back?
+        <ul>
+          <li>Exceptions</li>
+          <li><strong>System call</strong> =&gt; functions in interrupt vector table</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>Administrative processis still running user model</li>
+</ul>
+
+<h4 id="system-call">System Call</h4>
+<ul>
+  <li>user mode =&gt; kernel mode (All these are atomic)
+    <ul>
+      <li>Set the mode bit to kernel mode</li>
+      <li>Save registers, program counter, stack pointer</li>
+      <li>Switch to the kernel stack (via changing sp)
+        <ul>
+          <li>Otherwise, other thread in can modify the kernel stack</li>
+          <li>Each thread has its own kernel stack</li>
+        </ul>
+      </li>
+      <li>Switch to the kernel address space</li>
+      <li>Jump to the sys call interrupt_handler</li>
+    </ul>
+  </li>
+  <li>Interrupt vector table (set in boot or changed by kernel )
+    <ul>
+      <li>Stores the location for interrupt_handler</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="process-creation">Process Creation</h3>
+<ul>
+  <li>Allocate process control block</li>
+  <li>Initilize tranlation data for new address space</li>
+  <li>Read program from executable into memory</li>
+  <li>Initialize register</li>
+  <li>Set user mode bit to user</li>
+  <li>Jump to start of program</li>
+</ul>
+
+<h3 id="multiprocess-issues">Multiprocess Issues</h3>
+<ul>
+  <li>Global vs. Local Replacement</li>
+  <li>Thrashing (Working set)
+    <ul>
+      <li>active memory &gt; physical memory</li>
+      <li>i.e. (t working set &gt; physical memory)</li>
+      <li>How to fix it? Run a subset of the processes.</li>
+    </ul>
+  </li>
+</ul>
+
+<h4 id="process-creation-1">Process Creation</h4>
+<ol>
+  <li>fork()</li>
+  <li>exec(): replace new process’s data address space with data from program executable</li>
+</ol>
+
+<h2 id="io-and-file-systems">I/O and File Systems</h2>
+
+<h3 id="disk-io">Disk I/O</h3>
+<p>Abstraction provided by OS:</p>
+
+<ul>
+  <li>rich naming</li>
+  <li>flat =&gt; structured</li>
+  <li>caching</li>
+</ul>
+
+<p>Acess time is decide by</p>
+
+<ul>
+  <li>Queuing time</li>
+  <li>Overhead (positioning time)</li>
+  <li>Transfer time = size / transfer rate</li>
+</ul>
+
+<p>To optimize I/O performance</p>
+
+<script type="math/tex; mode=display">\mathrm{Efficiency = \frac{Transfer\ time}{(Posisioning\ time + Transfer\ time)}}</script>
+
+<ul>
+  <li>Avoid I/O =&gt; caching</li>
+  <li>Reduce overhead</li>
+  <li>Amortize overhead over larger request
+    <ul>
+      <li>Layout data on adjacent tracks
+        <ul>
+          <li>data in one file, files in the same directory are usually read together</li>
+          <li>acess pattern can be observed (e.g. on application loading)</li>
+        </ul>
+      </li>
+      <li>Disk scheduling
+        <ul>
+          <li>FCFS (first come, first served)/ FIFO (fisrt in, first out)</li>
+          <li>SSTF (shortest seek time first): cause starvation</li>
+          <li>SCAN: least overhead, optimizing throughtpu</li>
+          <li>CSCAN: more fair than SCAN</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<p>Flash RAM</p>
+
+<ul>
+  <li>Better read performance, better write performance but still slow</li>
+  <li>Wearout =&gt; level out the usage of all blocks</li>
+  <li>No overwrite =&gt; page program operation, erase operation before rewrite</li>
+</ul>
+
+<h3 id="file-systems">File Systems</h3>
+<ul>
+  <li>File system is a persistent data structure</li>
+  <li>File system supports: create, delete, read, write, search</li>
+  <li>Multiple storage devices can be mounted into one file system</li>
+</ul>
+
+<p>Rules of thumb</p>
+
+<ul>
+  <li>Most accesses are reads</li>
+  <li>Most accesses are sequencial and entire (spacial locality)</li>
+  <li>Most files are small, but most bytes are in the large files</li>
+</ul>
+
+<h4 id="how-to-find-files-how-to-organize-files">How to find files? How to organize files?</h4>
+
+<ul>
+  <li>File header (inode) that stores
+    <ul>
+      <li>file size</li>
+      <li>owner</li>
+      <li>access permissions</li>
+      <li>time stamp (modification ~, access ~, creation ~)</li>
+    </ul>
+  </li>
+</ul>
+
+<h5 id="contiguous-allocation-corresponds-to-base-and-bound">Contiguous allocation (corresponds to base and bound)</h5>
+<ul>
+  <li>An array of blocks</li>
+  <li>File header stores starting location and file size</li>
+  <li>Fast sequencial access</li>
+  <li>Difficult to grow file</li>
+  <li>External fragmentation</li>
+</ul>
+
+<h5 id="indexed-files-corresponds-to-paging">Indexed files (corresponds to paging)</h5>
+<ul>
+  <li>An array of block pointers</li>
+  <li>Easy to grow file, easy random access</li>
+  <li>Potentially slow sequencial access</li>
+</ul>
+
+<h6 id="multi-level-indexed-files">Multi-level indexed files</h6>
+<ul>
+  <li>A tree of block pointers</li>
+  <li>Allows large file without wasting header space for small files</li>
+  <li>Potentially more accesses to read a file block =&gt; unbalanced tree</li>
+</ul>
+
+<h4 id="file-caching">File Caching</h4>
+<ul>
+  <li>Virtual memory starts from memory and adds disk for larger capacity</li>
+  <li>File system starts from disk and adds memory for better performance</li>
+  <li>Unified buffer cache (global replacement)
+    <ul>
+      <li>Benefit: memory-mapped file (makes file look like part of the address space)</li>
+    </ul>
+  </li>
+  <li>Cache design
+    <ul>
+      <li>write back: fast</li>
+      <li>write through: slow, persistent</li>
+      <li>=&gt; To have a process that runs periodically and write back dirty pages</li>
+    </ul>
+  </li>
+</ul>
+
+<h4 id="reliability--durability">Reliability &amp; Durability</h4>
+<ul>
+  <li>Ordering</li>
+  <li>Transaction: operation that must succeed or fail, but not partially complete
+    <ul>
+      <li>atomicity</li>
+      <li>durability</li>
+    </ul>
+  </li>
+</ul>
+
+<h5 id="shadowing-enable-time-machine">Shadowing (enable time machine)</h5>
+<ol>
+  <li>Update the shadow</li>
+  <li>Change the pointer</li>
+  <li>Update the new shadow</li>
+</ol>
+
+<h6 id="shadow-paging">Shadow Paging</h6>
+<ul>
+  <li>Based on the observation that file system is a tree</li>
+  <li>Only shadow nodes that are related to the transaction</li>
+</ul>
+
+<h5 id="logging">Logging</h5>
+<ol>
+  <li>Write modifications to log, (which is stored in the disk)</li>
+  <li>Write commit to log</li>
+  <li>Update the data store</li>
+  <li>Truncate the log</li>
+</ol>
+
+<ul>
+  <li>If only logging metadata, called journalling</li>
+</ul>
+
+<h5 id="log-structrued-file-system-lfs">Log-structrued File System (LFS)</h5>
+<ul>
+  <li>Optimize file system for writes (sequential)</li>
+  <li>Make the file system a huge log</li>
+  <li>inode map: a table of inode and block</li>
+  <li>Check point region (small): tells where inode maps are</li>
+  <li>Multiple check point with check sum to make sure it is valid</li>
+</ul>
+
+<p>Problem: external fragmentation =&gt; log cleaner</p>
+
+<h2 id="networking-and-distributed-system">Networking and Distributed System</h2>
+
+<h3 id="networking">Networking</h3>
+
+<h4 id="socket">Socket</h4>
+<p>app -&gt; socket -&gt; NIC(network interface card) -&gt; NIC -&gt; socket -&gt; app</p>
+
+<ul>
+  <li>name: port number</li>
+  <li>bounded consumer-producer buffer</li>
+</ul>
+
+<h4 id="ip-internet-protocol">IP (Internet Protocol)</h4>
+
+<ul>
+  <li>UDP: message-oriented protocol, send data in chuncks (message bound visible), unreliable, fast (e.g. for live vedio streaming)</li>
+  <li>TCP: connection-oriented protocol, slow, provide three abstractions
+    <ul>
+      <li>reliability
+        <ul>
+          <li>lost (sequence number and acknoledgement message)</li>
+          <li>duplicate transmission (sequence number)</li>
+          <li>corruption (check sum)</li>
+        </ul>
+      </li>
+      <li>ordering (sequence number)</li>
+      <li>byte stream (message bound visible) (so receive message in while loop!)
+        <ul>
+          <li>to agree on the message size beforehand</li>
+          <li>use header message to send message size</li>
+          <li>sentinel to mark the end of message: e.g. C-string ends at \0
+            <ul>
+              <li>bitstuffing: replace sentinels in message as \0 =&gt; \0\1 and actual sentinel as \0 =&gt; \0\0)</li>
+            </ul>
+          </li>
+          <li>close connection to indicate end of message</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="distributed-system">Distributed System</h3>
+
+<p>Why do we want distributed System?</p>
+
+<ul>
+  <li>People interacting are distributed</li>
+  <li>performance</li>
+  <li>reliability/fault tolerance</li>
+</ul>
+
+<p>Client/server is the most basic form of distributed system:  <br />
+server (sends response) &lt;-&gt; client (sends request)</p>
+
+<p><strong>e.g.1 of server design (coke machine)</strong></p>
+
+<div class="language-c++ highlighter-rouge"><pre class="highlight"><code><span class="cm">/*------- Client side -------*/</span>
+<span class="n">client_produce</span><span class="p">()</span> <span class="p">{</span>
+	<span class="n">send</span> <span class="n">request</span> <span class="n">to</span> <span class="n">produce</span> <span class="n">coke</span>
+	<span class="n">wait</span> <span class="k">for</span> <span class="n">response</span>
+<span class="p">}</span>
+
+<span class="n">client_consume</span><span class="p">()</span> <span class="p">{</span>
+	<span class="n">send</span> <span class="n">request</span> <span class="n">to</span> <span class="n">consume</span> <span class="n">coke</span>
+	<span class="n">wait</span> <span class="k">for</span> <span class="n">response</span>
+<span class="p">}</span>
+
+<span class="n">server</span><span class="p">()</span> <span class="p">{</span> <span class="c1">// this is a blocking server
+</span>	<span class="k">while</span><span class="p">()</span> <span class="p">{</span>
+		<span class="n">receive</span> <span class="n">request</span>
+		<span class="kr">thread</span> <span class="n">t</span><span class="p">(</span><span class="n">server_handle_request</span><span class="p">,</span> <span class="n">request</span><span class="p">)</span>
+		<span class="c1">// cost of creating thread is expensive
+</span>		<span class="c1">// =&gt; have a worker thread pool
+</span>	<span class="p">}</span>
+<span class="p">}</span>
+
+<span class="cm">/*------- Server side -------*/</span>
+<span class="n">server_handle_request</span><span class="p">(</span><span class="n">request</span><span class="p">)</span> <span class="p">{</span>
+	<span class="n">lock</span><span class="p">.</span><span class="n">lock</span><span class="p">()</span>
+	<span class="k">if</span> <span class="p">(</span><span class="n">request</span> <span class="n">is</span> <span class="n">product</span><span class="p">)</span> <span class="p">{</span>
+		<span class="k">while</span> <span class="p">(</span><span class="n">machine</span> <span class="n">is</span> <span class="n">full</span><span class="p">)</span>
+			<span class="n">cv1</span><span class="p">.</span><span class="n">wait</span><span class="p">(</span><span class="n">lock</span><span class="p">)</span>
+		<span class="n">put</span> <span class="n">coke</span> <span class="n">in</span> <span class="n">machine</span>
+		<span class="n">signal</span> <span class="n">cv2</span>
+	<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+		<span class="k">while</span> <span class="p">(</span><span class="n">machine</span> <span class="n">is</span> <span class="n">empty</span><span class="p">)</span>
+			<span class="n">cv2</span><span class="p">.</span><span class="n">wait</span><span class="p">(</span><span class="n">lock</span><span class="p">)</span>
+		<span class="n">take</span> <span class="n">coke</span> <span class="n">out</span> <span class="n">of</span> <span class="n">machine</span>
+		<span class="n">signal</span> <span class="n">cv1</span>
+	<span class="p">}</span>
+	<span class="n">send</span> <span class="n">response</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<p><strong>e.g.2 of server design (event driven programming)</strong></p>
+
+<div class="language-c++ highlighter-rouge"><pre class="highlight"><code><span class="n">server</span><span class="p">()</span> <span class="p">{</span>
+	<span class="k">if</span> <span class="p">(</span><span class="n">request</span> <span class="n">is</span> <span class="n">produce</span><span class="p">)</span> <span class="p">{</span>
+		<span class="n">asynchronously</span> <span class="n">put</span> <span class="n">coke</span> <span class="n">in</span> <span class="n">machine</span>
+		<span class="k">register</span> <span class="n">a</span> <span class="n">call</span> <span class="n">back</span> <span class="n">in</span> <span class="n">machine</span>
+	<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+		<span class="n">asynchronously</span> <span class="n">take</span> <span class="n">coke</span> <span class="n">out</span> <span class="n">of</span> <span class="n">machine</span>
+		<span class="k">register</span> <span class="n">a</span> <span class="n">call</span> <span class="n">back</span> <span class="n">in</span> <span class="n">machine</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<p><strong>e.g.3 of server design</strong> (RPC – remote procedure call)  <br />
+user =&gt; client =&gt; client_stub =&gt; server_stub =&gt; server</p>
+
+<div class="language-c++ highlighter-rouge"><pre class="highlight"><code><span class="cm">/*------- Client stub -------*/</span>
+<span class="kt">int</span> <span class="nf">client_produce</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">)</span> <span class="p">{</span>
+	<span class="kt">int</span> <span class="n">status</span><span class="p">;</span>
+	<span class="n">send</span><span class="p">(</span><span class="n">sock</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">n</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">n</span><span class="p">));</span>
+	<span class="n">recv</span><span class="p">(</span><span class="n">sock</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">status</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">status</span><span class="p">));</span>
+	<span class="k">return</span> <span class="n">status</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="cm">/*------- Server stub -------*/</span>
+<span class="kt">void</span> <span class="nf">product_stub</span><span class="p">()</span> <span class="p">{</span>
+	<span class="kt">int</span> <span class="n">n</span><span class="p">,</span> <span class="n">status</span><span class="p">;</span>
+	<span class="n">recv</span><span class="p">(</span><span class="n">sock</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">n</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">n</span><span class="p">));</span>
+	<span class="n">status</span> <span class="o">=</span> <span class="n">server_produce</span><span class="p">(</span><span class="n">n</span><span class="p">);</span>
+	<span class="n">send</span><span class="p">(</span><span class="n">sock</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">status</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">status</span><span class="p">));</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<h4 id="ordering-of-distributed-system">Ordering of distributed system</h4>
+<ul>
+  <li>To synchronize in distributed system, we use message to communicate rather than shared memory.</li>
+  <li>Def of <strong>happens before</strong>: Event A happens before event B in a distributed system, iff A could have influenced B.</li>
+</ul>
+
+<p><strong>Lamports Rule of Ordering</strong> (gives partial ordering)</p>
+
+<ol>
+  <li>All events in a single process/thread are totally ordered</li>
+  <li>Sending message happens before receiving a message</li>
+  <li>Transitivity applies</li>
+</ol>
+
+<p><strong>Lamport timestamp</strong> (gives total ordering that is consistent of partial ordering =&gt; ties can be broken by any mechanism)</p>
+
+<ol>
+  <li>Each thread has a numerical value that correspond to a logical clock. Each event in a single thread increases that value of clock. <code class="highlighter-rouge">Ci++</code></li>
+  <li>Each send stores a value of the local clock <code class="highlighter-rouge">Ci</code> in the message (after increasing it)</li>
+  <li>Each receive event set the local clock <code class="highlighter-rouge">Cj = max{Cj + 1, Ci + 1}</code></li>
+</ol>
+
+<h4 id="distributed-file-system">Distributed File System</h4>
+
+<h5 id="client-side-caching">Client side caching</h5>
+<ul>
+  <li>Put more work to the client</li>
+  <li>How to keep consistency?
+    <ul>
+      <li>braodcast update protocol</li>
+      <li>invalidation protocol
+        <ul>
+          <li>three states of files: invalid, shared, exclusive</li>
+          <li>problems: large overhead, expensive if write extensive, low fault tolerance</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h5 id="partition-of-work-among-multiple-server">Partition of work among multiple server</h5>
+<ul>
+  <li>Distribute volumes (subtrees of file system) over multiple server (usually with administrative boundary)</li>
+  <li>Solution1: a central server as a database of server-volume table</li>
+  <li>Solution2: consistent hashing (easy to insert and remove server)
+    <ul>
+      <li>hash v volumes</li>
+      <li>hash n servers</li>
+    </ul>
+  </li>
+  <li>But they do not solve the hotspot problem</li>
+</ul>
+
+<h5 id="replication-for-fault-tolerance">Replication (for fault tolerance)</h5>
+<ul>
+  <li>Client, Primary, Backup</li>
+  <li>If Primary fails, Backup becomes the Primary</li>
+  <li>On recovery, copy updates back to the original Primary. Primary becomes Backup.</li>
+  <li>Can also balance load on read requests</li>
+</ul>
+
+<h4 id="fault-tolerance">Fault Tolerance</h4>
+
+<h5 id="fail-stop-failure">Fail-stop failure</h5>
+<ol>
+  <li>On failure, a node stops running</li>
+  <li>Everyone can detect the failure</li>
+</ol>
+
+<ul>
+  <li>Solution: Primary-Backup Protocol</li>
+  <li>Require f+1 nodes to tolerate f failures</li>
+</ul>
+
+<h5 id="crash-failure">Crash failure</h5>
+<ol>
+  <li>On failure, a node stops running</li>
+  <li>Can not detect the failure</li>
+</ol>
+
+<ul>
+  <li>Solution: Paxos Protocol</li>
+  <li>Require 2f+1 nodes to tolerate f failures</li>
+</ul>
+
+<h5 id="byzantine-failure">Byzantine failure</h5>
+<ul>
+  <li>Safety: if agree, agree on the same value</li>
+  <li>Liveness: eventually agree on something</li>
+  <li>
+    <p>With three or less nodes, the solution is either unsafe or not live</p>
+  </li>
+  <li>Solution: Byzantine Failure Tolerant Algorithm
+    <ul>
+      <li>Pre-prepare phase: commander sends messages to lieutenant</li>
+      <li>Prepare phase: lieutenants send messages to everyone</li>
+      <li>Commit phase: everyone send dicision to everyone</li>
+    </ul>
+  </li>
+  <li>Require 3f+1 nodes to tolerate f failures</li>
+  <li>Failures have to be independent =&gt; expensive</li>
+</ul>
+
+<h5 id="replicated-state-machine">Replicated State Machine</h5>
+<ul>
+  <li>Same starting state</li>
+  <li>Same states and same deterministic transitions</li>
+</ul>
+
+  </div>
+
+  <div id="disqus_thread"></div>
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'qinyeli-github-pages'; // required: replace example with your forum shortname
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+</article>
+      </div>
+    </div>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Qinye Li (Sindy)</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li>Qinye Li (Sindy)</li>
+          <li><a href="mailto:qinyeli@umich.edu">qinyeli@umich.edu</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col footer-col-2">
+        <ul class="social-media-list">
+          
+          <li>
+            <a href="https://github.com/qinyeli"><span class="icon icon--github"><svg viewBox="0 0 16 16"><path fill="#828282" d="M7.999,0.431c-4.285,0-7.76,3.474-7.76,7.761 c0,3.428,2.223,6.337,5.307,7.363c0.388,0.071,0.53-0.168,0.53-0.374c0-0.184-0.007-0.672-0.01-1.32 c-2.159,0.469-2.614-1.04-2.614-1.04c-0.353-0.896-0.862-1.135-0.862-1.135c-0.705-0.481,0.053-0.472,0.053-0.472 c0.779,0.055,1.189,0.8,1.189,0.8c0.692,1.186,1.816,0.843,2.258,0.645c0.071-0.502,0.271-0.843,0.493-1.037 C4.86,11.425,3.049,10.76,3.049,7.786c0-0.847,0.302-1.54,0.799-2.082C3.768,5.507,3.501,4.718,3.924,3.65 c0,0,0.652-0.209,2.134,0.796C6.677,4.273,7.34,4.187,8,4.184c0.659,0.003,1.323,0.089,1.943,0.261 c1.482-1.004,2.132-0.796,2.132-0.796c0.423,1.068,0.157,1.857,0.077,2.054c0.497,0.542,0.798,1.235,0.798,2.082 c0,2.981-1.814,3.637-3.543,3.829c0.279,0.24,0.527,0.713,0.527,1.437c0,1.037-0.01,1.874-0.01,2.129 c0,0.208,0.14,0.449,0.534,0.373c3.081-1.028,5.302-3.935,5.302-7.362C15.76,3.906,12.285,0.431,7.999,0.431z"/></svg>
+</span><span class="username">qinyeli</span></a>
+
+          </li>
+          
+
+          
+        </ul>
+      </div>
+
+      <div class="footer-col footer-col-3">
+        <p></p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+
+
+  </body>
+
+</html>

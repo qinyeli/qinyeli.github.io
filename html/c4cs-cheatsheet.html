@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>C4CS Cheat Sheet</title>
+  <meta name="description" content="EECS398 Computing for Computer Scientists – Final Cheat Sheet">
+
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="http://qinyeli.github.io//eecs398/cheatsheet/2016/04/04/c4cs-cheatsheet.html">
+  <link rel="alternate" type="application/rss+xml" title="Qinye Li (Sindy)" href="http://qinyeli.github.io//feed.xml">
+</head>
+
+
+  <body>
+
+    <header class="site-header">
+
+  <div class="wrapper">
+
+    <a class="site-title" href="/">Qinye Li (Sindy)</a>
+
+    <nav class="site-nav">
+      <a href="#" class="menu-icon">
+        <svg viewBox="0 0 18 15">
+          <path fill="#424242" d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.031C17.335,0,18,0.665,18,1.484L18,1.484z"/>
+          <path fill="#424242" d="M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0c0-0.82,0.665-1.484,1.484-1.484 h15.031C17.335,6.031,18,6.696,18,7.516L18,7.516z"/>
+          <path fill="#424242" d="M18,13.516C18,14.335,17.335,15,16.516,15H1.484C0.665,15,0,14.335,0,13.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.031C17.335,12.031,18,12.696,18,13.516L18,13.516z"/>
+        </svg>
+      </a>
+
+      <div class="trigger">
+        
+          
+          <a class="page-link" href="/about/">About</a>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      </div>
+    </nav>
+
+  </div>
+
+</header>
+
+
+    <div class="page-content">
+      <div class="wrapper">
+        <!-- Html Elements for Search -->
+<div id="search-container">
+  <input type="text" id="search-input" placeholder="search...">
+  <ul id="results-container"></ul>
+</div>
+
+<!-- Script pointing to jekyll-search.js -->
+<script src="/js/jekyll-search.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+  SimpleJekyllSearch({
+    searchInput: document.getElementById('search-input'),
+    resultsContainer: document.getElementById('results-container'),
+    json: '/search.json',
+    searchResultTemplate: '<li><a href="{url}" title="{desc}">{title}</a></li>',
+    noResultsText: 'No results found',
+    limit: 10,
+    fuzzy: false
+  })
+</script>
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title" itemprop="name headline">C4CS Cheat Sheet</h1>
+    <p class="post-meta"><time datetime="2016-04-04T00:00:00-04:00" itemprop="datePublished">Apr 4, 2016</time></p>
+  </header>
+
+  <div class="post-content" itemprop="articleBody">
+    <h1 id="eecs398-computing-for-computer-scientists----final-cheat-sheet">EECS398 Computing for Computer Scientists – Final Cheat Sheet</h1>
+
+<h2 id="virtual-machine">Virtual Machine</h2>
+<ul>
+  <li>Features of Virtual Box guest addition:
+    <ul>
+      <li>shared folders</li>
+      <li>drag and drop, shared clipboard</li>
+      <li>enable resolution setting</li>
+      <li>mouse pointer integration</li>
+      <li>time  synchronization,shared clipboard</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="unixscripting">Unix/Scripting</h2>
+<ul>
+  <li>Path is an environment variable that specifying a set of directories where executable programs are located. e.g. ls =&gt; /bin/ls</li>
+  <li>Special variables
+    <ul>
+      <li><code class="highlighter-rouge">$?</code>: return value of the most recent command (0 if succeed)</li>
+      <li><code class="highlighter-rouge">$_</code>: most recent parameter</li>
+      <li><code class="highlighter-rouge">$1, $2, $3</code>: positional parameters</li>
+      <li><code class="highlighter-rouge">$@</code>: array of all positional parameters {$1, $2, $3 …}</li>
+      <li><code class="highlighter-rouge">$#</code>: number of propositional parameters</li>
+    </ul>
+  </li>
+  <li><code class="highlighter-rouge">set</code>: prints current environment</li>
+  <li><code class="highlighter-rouge">env</code>: prints current environment variables “exported”</li>
+</ul>
+
+<h2 id="editors">Editors</h2>
+<ul>
+  <li>Vim and Emacs</li>
+</ul>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left"> </th>
+      <th style="text-align: center">vim</th>
+      <th style="text-align: center">emacs</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">save</td>
+      <td style="text-align: center">:w</td>
+      <td style="text-align: center">C-x C-s</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">quit without saving</td>
+      <td style="text-align: center">:q!</td>
+      <td style="text-align: center">C-x C-c n yes</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">save and quit</td>
+      <td style="text-align: center">:wq</td>
+      <td style="text-align: center">C-x C-s C-x C-c</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">search “TODO”</td>
+      <td style="text-align: center">/TODO</td>
+      <td style="text-align: center">C-s TODO</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">find the next “TODO”</td>
+      <td style="text-align: center">n</td>
+      <td style="text-align: center">C-s</td>
+    </tr>
+  </tbody>
+</table>
+
+<ul>
+  <li>sed
+    <ul>
+      <li>e.g. <code class="highlighter-rouge">sed s/one/zero/ input.txt</code> replace the first one in the line with zero</li>
+      <li>e.g. <code class="highlighter-rouge">sed s/one/zero/i input.txt</code> <code class="highlighter-rouge">i</code> means ignore case</li>
+      <li>e.g. <code class="highlighter-rouge">sed s/one/zero/g input.txt</code> <code class="highlighter-rouge">g</code> means global</li>
+      <li>e.g. <code class="highlighter-rouge">sed -i s/one/zero/g input.txt</code> <code class="highlighter-rouge">-i</code> means in place</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="git">Git</h2>
+<ul>
+  <li><code class="highlighter-rouge">git init</code></li>
+  <li><code class="highlighter-rouge">git status</code></li>
+  <li><code class="highlighter-rouge">git add</code>: working directory =&gt; staging area (index)</li>
+  <li><code class="highlighter-rouge">git commit</code>: staging area =&gt; repository (object database)</li>
+  <li><code class="highlighter-rouge">git push</code></li>
+  <li><code class="highlighter-rouge">git pull</code></li>
+  <li>workign directory, staging area</li>
+</ul>
+
+<h2 id="regrex-and-grep">Regrex and grep</h2>
+<ul>
+  <li><code class="highlighter-rouge">^</code>: beginning of a strng</li>
+  <li><code class="highlighter-rouge">$</code>: end of a string</li>
+  <li>
+    <p><code class="highlighter-rouge">.</code>: any character</p>
+  </li>
+  <li><code class="highlighter-rouge">grep -c [regex] [dir]</code>: <code class="highlighter-rouge">-c</code> means count</li>
+  <li><code class="highlighter-rouge">grep -v [regex] [dir]</code>: <code class="highlighter-rouge">-v</code> means invert match</li>
+  <li><code class="highlighter-rouge">grep -f [regex] [file]</code>: <code class="highlighter-rouge">-f</code> means file</li>
+  <li><code class="highlighter-rouge">git grep</code> searches staged files, but not untracked files</li>
+</ul>
+
+<h2 id="makefile">Makefile</h2>
+<ul>
+  <li>format:</li>
+</ul>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>target: dependency / prerequisite
+	command
+</code></pre>
+</div>
+
+<ul>
+  <li><code class="highlighter-rouge">.PHONY</code>: targets that are not files</li>
+  <li><code class="highlighter-rouge">make all</code>: runs the first target that does not start with .</li>
+  <li><code class="highlighter-rouge">-B</code>: always make</li>
+  <li>special variables
+    <ul>
+      <li><code class="highlighter-rouge">$@</code>: name of the target</li>
+      <li><code class="highlighter-rouge">$?</code>: first prerequisite (usually the source file)</li>
+      <li><code class="highlighter-rouge">$^</code>: all prerequisite</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="gdb">GDB</h2>
+<ul>
+  <li><code class="highlighter-rouge">break</code>: break point (e.g. <code class="highlighter-rouge">break if x == 0</code>, <code class="highlighter-rouge">break main.c::20</code>, <code class="highlighter-rouge">break function</code>)</li>
+  <li><code class="highlighter-rouge">step</code>: step into</li>
+  <li><code class="highlighter-rouge">next</code>: step over</li>
+  <li><code class="highlighter-rouge">finish</code>: step out of</li>
+  <li><code class="highlighter-rouge">continue</code>: to next breakpoint or end</li>
+  <li><code class="highlighter-rouge">frame</code>: where am i</li>
+  <li><code class="highlighter-rouge">set</code>: e.g. <code class="highlighter-rouge">set x=1</code></li>
+  <li><code class="highlighter-rouge">up</code>: to caller</li>
+  <li><code class="highlighter-rouge">down</code>: to callee (after <code class="highlighter-rouge">up</code>)</li>
+  <li><code class="highlighter-rouge">print</code>: print value of variable</li>
+</ul>
+
+<h2 id="profiling">Profiling</h2>
+<ul>
+  <li><code class="highlighter-rouge">grof</code>: compiling with <code class="highlighter-rouge">-pg</code> flag and fun that executable generates <code class="highlighter-rouge">gmon.out</code></li>
+</ul>
+
+  </div>
+
+  <div id="disqus_thread"></div>
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'qinyeli-github-pages'; // required: replace example with your forum shortname
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+</article>
+      </div>
+    </div>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Qinye Li (Sindy)</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li>Qinye Li (Sindy)</li>
+          <li><a href="mailto:qinyeli@umich.edu">qinyeli@umich.edu</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col footer-col-2">
+        <ul class="social-media-list">
+          
+          <li>
+            <a href="https://github.com/qinyeli"><span class="icon icon--github"><svg viewBox="0 0 16 16"><path fill="#828282" d="M7.999,0.431c-4.285,0-7.76,3.474-7.76,7.761 c0,3.428,2.223,6.337,5.307,7.363c0.388,0.071,0.53-0.168,0.53-0.374c0-0.184-0.007-0.672-0.01-1.32 c-2.159,0.469-2.614-1.04-2.614-1.04c-0.353-0.896-0.862-1.135-0.862-1.135c-0.705-0.481,0.053-0.472,0.053-0.472 c0.779,0.055,1.189,0.8,1.189,0.8c0.692,1.186,1.816,0.843,2.258,0.645c0.071-0.502,0.271-0.843,0.493-1.037 C4.86,11.425,3.049,10.76,3.049,7.786c0-0.847,0.302-1.54,0.799-2.082C3.768,5.507,3.501,4.718,3.924,3.65 c0,0,0.652-0.209,2.134,0.796C6.677,4.273,7.34,4.187,8,4.184c0.659,0.003,1.323,0.089,1.943,0.261 c1.482-1.004,2.132-0.796,2.132-0.796c0.423,1.068,0.157,1.857,0.077,2.054c0.497,0.542,0.798,1.235,0.798,2.082 c0,2.981-1.814,3.637-3.543,3.829c0.279,0.24,0.527,0.713,0.527,1.437c0,1.037-0.01,1.874-0.01,2.129 c0,0.208,0.14,0.449,0.534,0.373c3.081-1.028,5.302-3.935,5.302-7.362C15.76,3.906,12.285,0.431,7.999,0.431z"/></svg>
+</span><span class="username">qinyeli</span></a>
+
+          </li>
+          
+
+          
+        </ul>
+      </div>
+
+      <div class="footer-col footer-col-3">
+        <p></p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+
+
+  </body>
+
+</html>
