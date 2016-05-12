@@ -1,10 +1,11 @@
 ---
 layout: post
-title:  "Vim Cheatsheet"
+title:  "Vim Cheat Sheet"
 categories: vim cheatsheet
+published: false
 ---
 
-# Vim Cheatsheet
+# Vim Cheat Sheet
 
 ## Move
 * `h`: left

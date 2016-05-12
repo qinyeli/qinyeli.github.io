@@ -1,10 +1,11 @@
 ---
 layout: post
-title:  "C4CS Cheatsheet"
+title:  "C4CS Cheat Sheet"
 categories: eecs398 cheatsheet
+published: false
 ---
 
-# EECS398 Computing for Computer Scientists -- Final Cheatsheet
+# EECS398 Computing for Computer Scientists -- Final Cheat Sheet
 
 ## Virtual Machine
 * Features of Virtual Box guest addition:
