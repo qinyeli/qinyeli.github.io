@@ -9,5 +9,5 @@ categories: cheatsheet note
 [Makefile Cheat Sheet](/html/Makefile-cheatsheet.html)
 
 ### Final Cheat Sheet/ Review Note for Courses
-[EECS398 Computing for Computer Sicnetists](/html/c4cs-cheatsheet.html)  
+[EECS398 Computing for Computer Sicientists](/html/c4cs-cheatsheet.html)  
 [EECS482 Operating Systems](/html/eecs482-cheatsheet.html)
