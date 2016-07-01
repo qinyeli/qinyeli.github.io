@@ -5,9 +5,11 @@ categories: cheatsheet note
 ---
 
 ### Cheat Sheet for Tools
-[Vim Cheat Sheet](/html/vim-cheatsheet.html)  
-[Makefile Cheat Sheet](/html/Makefile-cheatsheet.html)
+[Git Cheat Sheet](/html/git-cheatsheet.html)  
+[Makefile Cheat Sheet](/html/makefile-cheatsheet.html)  
+[Numpy Cheat Sheet](/html/numpy-cheatsheet.html)  
+[Vim Cheat Sheet](/html/vim-cheatsheet.html)
 
-### Final Cheat Sheet/ Review Note for Courses
-[EECS398 Computing for Computer Sicientists](/html/c4cs-cheatsheet.html)  
-[EECS482 Operating Systems](/html/eecs482-cheatsheet.html)
+### Review Notes
+[EECS398 Computing for Computer Sicientists](/html/c4cs-note.html)  
+[EECS482 Operating Systems](/html/eecs482-note.html)

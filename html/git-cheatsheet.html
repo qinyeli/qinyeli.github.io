@@ -6,11 +6,11 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Cheat Sheets and Notes</title>
-  <meta name="description" content="Cheat Sheet for ToolsGit Cheat SheetMakefile Cheat SheetNumpy Cheat SheetVim Cheat Sheet">
+  <title>Git Cheat Sheet</title>
+  <meta name="description" content="Git Cheat Sheet">
 
   <link rel="stylesheet" href="/css/main.css">
-  <link rel="canonical" href="http://qinyeli.github.io//cheatsheet/note/2016/05/12/cheatsheets.html">
+  <link rel="canonical" href="http://qinyeli.github.io//git/cheatsheet/2016/07/01/git-cheatsheet.html">
   <link rel="alternate" type="application/rss+xml" title="Qinye Li (Sindy)" href="http://qinyeli.github.io//feed.xml">
 </head>
 
@@ -79,20 +79,76 @@
         <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
 
   <header class="post-header">
-    <h1 class="post-title" itemprop="name headline">Cheat Sheets and Notes</h1>
-    <p class="post-meta"><time datetime="2016-05-12T00:00:00-04:00" itemprop="datePublished">May 12, 2016</time></p>
+    <h1 class="post-title" itemprop="name headline">Git Cheat Sheet</h1>
+    <p class="post-meta"><time datetime="2016-07-01T00:00:00-04:00" itemprop="datePublished">Jul 1, 2016</time></p>
   </header>
 
   <div class="post-content" itemprop="articleBody">
-    <h3 id="cheat-sheet-for-tools">Cheat Sheet for Tools</h3>
-<p><a href="/html/git-cheatsheet.html">Git Cheat Sheet</a><br />
-<a href="/html/makefile-cheatsheet.html">Makefile Cheat Sheet</a><br />
-<a href="/html/numpy-cheatsheet.html">Numpy Cheat Sheet</a><br />
-<a href="/html/vim-cheatsheet.html">Vim Cheat Sheet</a></p>
+    <h1 id="git-cheat-sheet">Git Cheat Sheet</h1>
 
-<h3 id="review-notes">Review Notes</h3>
-<p><a href="/html/c4cs-note.html">EECS398 Computing for Computer Sicientists</a><br />
-<a href="/html/eecs482-note.html">EECS482 Operating Systems</a></p>
+<h2 id="basics">Basics</h2>
+<div class="highlighter-rouge"><pre class="highlight"><code>git init
+git status
+git add *
+git add .
+git commit -m "Init Commit"
+git log (--summary)
+git remote -v
+git remote add origin &lt;url&gt;
+git push -u origin master
+git pull origin master
+git diff HEAD
+git diff --staged
+git reset &lt;filename&gt;
+git checkout -- deleted_file
+git rm &lt;filename&gt;
+</code></pre>
+</div>
+
+<h2 id="branches">Branches</h2>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>git checkout -b new_branch
+	// git branch new_branch 
+	// git checkout new_branch
+git merge another_branch
+git branch -d some_branch
+git branch -D some_branch
+git branch -d --force some_branch
+git branch -d -f some_branch
+</code></pre>
+</div>
+
+<h2 id="how-to-recover-a-deleted-file-after-commit">How to recover a deleted file (after commit)?</h2>
+<div class="highlighter-rouge"><pre class="highlight"><code>git log --diff-filter=D --summary
+git checkout &lt;commit&gt;^ &lt;file&gt;
+</code></pre>
+</div>
+
+<h2 id="how-to-recover-a-deleted-file-before-commit">How to recover a deleted file (before commit)?</h2>
+<div class="highlighter-rouge"><pre class="highlight"><code>git ls-files --deleted
+git checkout &lt;file&gt;
+</code></pre>
+</div>
+
+<h2 id="how-to-recover-a-lost-commit">How to recover a lost commit?</h2>
+<div class="highlighter-rouge"><pre class="highlight"><code>git reflog
+git reset &lt;commit&gt; --hard
+</code></pre>
+</div>
+
+<h2 id="how-to-undelete-changes">How to undelete changes?</h2>
+<div class="highlighter-rouge"><pre class="highlight"><code>git fsck (dangling blob)
+git cat-file -p &lt;dangling blob&gt; &gt; recovered_file
+</code></pre>
+</div>
+
+<h2 id="other-note">Other note</h2>
+<div class="highlighter-rouge"><pre class="highlight"><code>git revert ^ (make a copy of previous commit)
+git reset (back to previous commit; to unstage a file)
+git reset --hard (to reset a file)
+</code></pre>
+</div>
+
 
   </div>
 
