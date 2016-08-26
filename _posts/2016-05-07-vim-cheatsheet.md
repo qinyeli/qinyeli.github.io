@@ -68,7 +68,7 @@ published: false
 * `Ctrl + R`: redo
 * `v`: enter visual mode
 
-## Search and Replac
+## Search and Replace
 * `/keyword`: search
 	* `n`: next
 	* `N`: previous

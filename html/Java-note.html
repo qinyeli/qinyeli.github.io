@@ -94,9 +94,12 @@
         </ul>
       </li>
       <li><a href="#objects-types-and-style" id="markdown-toc-objects-types-and-style">Objects, Types and Style</a>        <ul>
-          <li><a href="#building-and-running-from-command-line" id="markdown-toc-building-and-running-from-command-line">Building and Running from command line</a></li>
+          <li><a href="#building-and-running-from-command-line" id="markdown-toc-building-and-running-from-command-line">Building and Running from command line</a>            <ul>
+              <li><a href="#command-line-argument" id="markdown-toc-command-line-argument">Command line argument</a></li>
+            </ul>
+          </li>
           <li><a href="#built-in-types" id="markdown-toc-built-in-types">Built-in types</a></li>
-          <li><a href="#not-built-int-types" id="markdown-toc-not-built-int-types">Not Built-int types</a></li>
+          <li><a href="#not-built-in-types" id="markdown-toc-not-built-in-types">Not Built-in types</a></li>
           <li><a href="#class-attributes-member-variables" id="markdown-toc-class-attributes-member-variables">Class attributes (member variables)</a></li>
         </ul>
       </li>
@@ -139,6 +142,9 @@
       <li><a href="#other-note" id="markdown-toc-other-note">Other note</a>        <ul>
           <li><a href="#how-to-generate-random-numbers" id="markdown-toc-how-to-generate-random-numbers">How to generate random numbers?</a></li>
           <li><a href="#how-to-run-bash-from-java" id="markdown-toc-how-to-run-bash-from-java">How to run bash from Java</a></li>
+          <li><a href="#function-object-in-java" id="markdown-toc-function-object-in-java">Function object in Java</a></li>
+          <li><a href="#bigdecimal" id="markdown-toc-bigdecimal">BigDecimal</a></li>
+          <li><a href="#string-to-integer" id="markdown-toc-string-to-integer">String to Integer</a></li>
         </ul>
       </li>
     </ul>
@@ -220,18 +226,32 @@ File -&gt; Import -&gt; General -&gt; Existing projects into workspace -&gt; Nex
 </div>
 <p>This produces a file named “HelloWorld.class”. To run the code, type</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>java proj.qinyeli.HelloWorld
+<div class="highlighter-rouge"><pre class="highlight"><code>java proj.qinyeli.HelloWorld arg0 arg1
 </code></pre>
 </div>
 
+<h4 id="command-line-argument">Command line argument</h4>
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">myClass</span> <span class="o">{</span>
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="n">main</span><span class="o">(</span><span class="n">args</span><span class="o">[])</span> <span class="o">{</span>
+
+	<span class="o">}</span>
+<span class="o">}</span>
+</code></pre>
+</div>
+
+<ul>
+  <li>Unlike C++, whose <code class="highlighter-rouge">argv[0]</code> stores the name of the program, args[0] stores the first argument form the command line.</li>
+</ul>
+
 <h3 id="built-in-types">Built-in types</h3>
 <ul>
+  <li>Also called primitive types</li>
   <li>Start with lower case</li>
   <li>Passed by value</li>
   <li><code class="highlighter-rouge">boolean</code>, <code class="highlighter-rouge">char</code>, <code class="highlighter-rouge">int</code>, <code class="highlighter-rouge">long</code>, <code class="highlighter-rouge">byte</code>, <code class="highlighter-rouge">short</code>, <code class="highlighter-rouge">double</code>, <code class="highlighter-rouge">float</code></li>
 </ul>
 
-<h3 id="not-built-int-types">Not Built-int types</h3>
+<h3 id="not-built-in-types">Not Built-in types</h3>
 <ul>
   <li>Start with upper case</li>
   <li>Passed by reference</li>
@@ -242,7 +262,14 @@ File -&gt; Import -&gt; General -&gt; Existing projects into workspace -&gt; Nex
     </ul>
   </li>
   <li><code class="highlighter-rouge">String</code> in <code class="highlighter-rouge">java.lang</code></li>
-  <li>Wrapper: 	<code class="highlighter-rouge">Boolean</code>, <code class="highlighter-rouge">Char</code>, <code class="highlighter-rouge">Integer</code>, <code class="highlighter-rouge">Long</code>, <code class="highlighter-rouge">Byte</code>, <code class="highlighter-rouge">Short</code>, <code class="highlighter-rouge">Double</code>, <code class="highlighter-rouge">Float</code></li>
+  <li>Wrapper: 	<code class="highlighter-rouge">Boolean</code>, <code class="highlighter-rouge">Char</code>, <code class="highlighter-rouge">Integer</code>, <code class="highlighter-rouge">Long</code>, <code class="highlighter-rouge">Byte</code>, <code class="highlighter-rouge">Short</code>, <code class="highlighter-rouge">Double</code>, <code class="highlighter-rouge">Float</code>
+    <ul>
+      <li>Wrappers of primitive types are immutable</li>
+      <li>Immutable objects can not be changed once constructed</li>
+      <li>Instead, it creates a new object and alters the reference</li>
+      <li>Useful in concurrent applications</li>
+    </ul>
+  </li>
   <li>Use <code class="highlighter-rouge">obj1.equals(obj2)</code> to compare two objects</li>
 </ul>
 
@@ -281,6 +308,18 @@ File -&gt; Import -&gt; General -&gt; Existing projects into workspace -&gt; Nex
   <li>Implicit default ctor ( only available when no other programmer-defined ctors specified</li>
   <li>No destructor</li>
 </ul>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">myClass</span> <span class="o">{</span>
+	<span class="kd">public</span> <span class="n">myClass</span><span class="o">()</span> <span class="o">{</span>
+		<span class="o">...</span>
+	<span class="o">}</span>
+	<span class="kd">protected</span> <span class="kt">void</span> <span class="n">finalize</span><span class="o">()</span> <span class="o">{</span>
+		<span class="c1">// This function will be executed when the object is "dstructed"</span>
+		<span class="c1">// Do works such as close() here.</span>
+	<span class="o">}</span>
+<span class="o">}</span>
+</code></pre>
+</div>
 
 <h3 id="modifiers">Modifiers</h3>
 <ul>
@@ -659,8 +698,13 @@ arrayRef = new int[5];
 </ul>
 
 <h3 id="priority-queue">Priority Queue</h3>
+
+<ul>
+  <li>The <code class="highlighter-rouge">PriorityQueue</code> class in Java is a min heap</li>
+</ul>
+
 <div class="highlighter-rouge"><pre class="highlight"><code>import java.util.PriorityQueue
-E peak() // retrieves, but does not remove, the head of the queue (null if the queue is empty)
+E peek() // retrieves, but does not remove, the head of the queue (null if the queue is empty)
 E poll() // retrieves and removes the head of the queue (null if the queue is empty)
 boolean offer(E e) // inserts the e into the priority queue.
 </code></pre>
@@ -728,6 +772,8 @@ Scanner sc = new Scanner(System.in);
 <span class="o">}</span>
 <span class="n">PrintWriter</span> <span class="n">writer</span> <span class="o">=</span> <span class="k">new</span> <span class="n">PrintWriter</span><span class="o">(</span><span class="s">"fileName.txt"</span><span class="o">);</span>
 <span class="n">writer</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Hello World!"</span><span class="o">);</span>
+<span class="n">writer</span><span class="o">.</span><span class="na">flush</span><span class="o">();</span>
+<span class="n">writer</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
 </code></pre>
 </div>
 
@@ -737,17 +783,40 @@ Scanner sc = new Scanner(System.in);
 
 <h3 id="how-to-generate-random-numbers">How to generate random numbers?</h3>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>import java.util.Random;
+<p><em>Method 1</em></p>
 
-long randomSeed = (System.currentTimeMillis());
-Random random = Random(randomSeed);
-random.nextDouble(); // randomly returns a double between 0 and 1.
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">java.util.Random</span><span class="o">;</span>
+
+<span class="kt">long</span> <span class="n">randomSeed</span> <span class="o">=</span> <span class="o">(</span><span class="n">System</span><span class="o">.</span><span class="na">currentTimeMillis</span><span class="o">());</span>
+<span class="n">Random</span> <span class="n">random</span> <span class="o">=</span> <span class="n">Random</span><span class="o">(</span><span class="n">randomSeed</span><span class="o">);</span>
+<span class="n">random</span><span class="o">.</span><span class="na">nextDouble</span><span class="o">();</span> <span class="c1">// randomly returns a double between 0 and 1.</span>
+</code></pre>
+</div>
+<p><em>Method 2</em></p>
+
+<div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">java.lang.Math</span><span class="o">;</span>
+
+<span class="n">Math</span><span class="o">.</span><span class="na">rand</span><span class="o">();</span> <span class="c1">// randomly returns a double between 0 and 1</span>
 </code></pre>
 </div>
 
 <h3 id="how-to-run-bash-from-java">How to run bash from Java</h3>
 
 <div class="language-java highlighter-rouge"><pre class="highlight"><code><span class="n">Runtime</span><span class="o">.</span><span class="na">getRuntime</span><span class="o">().</span><span class="na">exec</span><span class="o">(</span><span class="s">"ls"</span><span class="o">);</span>
+</code></pre>
+</div>
+
+<h3 id="function-object-in-java">Function object in Java</h3>
+
+<p><a href="https://docs.oracle.com/javase/8/docs/api/java/util/function/package-summary.html">https://docs.oracle.com/javase/8/docs/api/java/util/function/package-summary.html</a></p>
+
+<h3 id="bigdecimal">BigDecimal</h3>
+
+<p><a href="https://docs.oracle.com/javase/7/docs/api/java/math/BigDecimal.html">https://docs.oracle.com/javase/7/docs/api/java/math/BigDecimal.html</a></p>
+
+<h3 id="string-to-integer">String to Integer</h3>
+<div class="highlighter-rouge"><pre class="highlight"><code>Integer x = Integer.valueOf(str);
+int y = Integer.parseInt(str);
 </code></pre>
 </div>
 
