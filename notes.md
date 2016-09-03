@@ -1,7 +1,7 @@
 ---
-layout: post
-title:  "Cheat Sheets and Notes"
-categories: cheatsheet note
+layout: page
+title:  Notes
+navigation_weight: 5
 ---
 
 ### Cheat Sheet for Tools
