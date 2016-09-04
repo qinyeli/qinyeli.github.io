@@ -2,7 +2,6 @@
 layout: post
 title:  "Makefile Cheatsheet"
 categories: makefile cheatsheet
-published: true
 ---
 
 # Makefile Cheatsheet

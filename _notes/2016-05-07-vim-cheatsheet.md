@@ -2,7 +2,6 @@
 layout: post
 title:  "Vim Cheat Sheet"
 categories: vim cheatsheet
-published: true
 ---
 
 # Vim Cheat Sheet

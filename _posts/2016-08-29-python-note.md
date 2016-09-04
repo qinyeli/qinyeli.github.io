@@ -2,7 +2,6 @@
 layout: post
 title:  "Python Note (for plotting)"
 categories: java note
-published: true
 ---
 
 # Python Note (mainly for plotting)

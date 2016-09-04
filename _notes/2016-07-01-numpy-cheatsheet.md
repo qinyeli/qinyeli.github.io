@@ -2,7 +2,6 @@
 layout: post
 title:  "Numpy Cheat Sheet"
 categories: numpy cheatsheet
-published: true
 ---
 
 # Numpy Cheat Sheet

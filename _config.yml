@@ -10,21 +10,33 @@ author:
   name:           "Qinye Li"
   url:            qinyeli.github.io
 
-# Build settings
-markdown: kramdown
-#kramdown:
-#  input: GFM # Enable GitHub Flavored Markdown (fenced code blocks)
+# Where things are
+# source:       .
+# destination:  ./_site
+# plugins_dir:  _plugins
+# layouts_dir:  _layouts
+# data_dir:     _data
+# includes_dir: _includes
+collections:
+  posts:
+    output:        true
+    permalink:     date #/:categories/:year/:month/:day/:title.html
+  notes:
+    output:        true
+    permalink:     /notes/:path/
 
-# Dependencies
-#markdown:         redcarpet
-highlighter:      pygments
+# Conversion
+markdown:          kramdown
+kramdown:
+  input:           GFM # Enable GitHub Flavored Markdown (fenced code blocks)
+highlighter:       pygments
 
 # Permalinks
-permalink:        pretty
+#permalink:        pretty #/:categories/:year/:month/:day/:title/
 #relative_permalinks: true
 
 # Setup
-paginate:         5
+paginate:          5
 
-# Gems
-gems:            [jekyll-paginate, jekyll-gist]
+# Plugins
+gems:             [jekyll-paginate, jekyll-gist]

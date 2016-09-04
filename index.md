@@ -6,7 +6,8 @@ navigation_weight: 1
 
 # Home
 
-  
-Hello ^ v ^
+Hello! This is Qinye Li (pronounced Chin-yeah Lee).
 
-This is Qinye Li (pronounced Chin-yeah Lee).
+I am a senior student studying computer science at the University of Michigan.
+
+<BR>&nbsp;<BR> 

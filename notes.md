@@ -4,20 +4,94 @@ title:  Notes
 navigation_weight: 5
 ---
 
-### Cheat Sheet for Tools
-[Git Cheat Sheet](/html/git-cheatsheet.html)  
-[Makefile Cheat Sheet](/html/makefile-cheatsheet.html)  
-[Numpy Cheat Sheet](/html/numpy-cheatsheet.html)  
-[Vim Cheat Sheet](/html/vim-cheatsheet.html)
+## Cheat Sheets for Tools
 
-### Review Notes
-[Computing for Computer Scientists](/html/eecs398-note.html)  
-[Data Structures and Algorithms](/resources/cheatsheets/eecs281_cheatsheet.pdf)  
-[Electronic Circuits](/resources/cheatsheets/eecs311_cheatsheet.pdf)  
-[General Physics II](/resources/cheatsheets/vp240_cheatsheet.pdf)  
-[Intro. to Artificial Intelligence](/resources/cheatsheets/eecs492_cheatsheet.pdf)  
-[Intro. to Computer Organization](/resources/cheatsheets/eecs370_cheatsheet.pdf)  
-[Intro. to Electronic Circuits](/resources/cheatsheets/ve215_cheatsheet.pdf)  
-[Intro. to Operating Systems](/html/eecs482-note.html)  
-[Intro. to Signals and Systems](/resources/cheatsheets/ve216_cheatsheet.pdf)  
-[Probabilistic Methods in Engineering](/resources/cheatsheets/ve401_cheatsheet.pdf)  
+<div class="related" name="blog-content">
+  <ul class="related-posts">
+    {% for note in site.notes %}
+      {% unless note.categories contains 'course' %}
+        <li>
+          <h3>
+            <a href="{{ note.url }}">
+              {{ note.title }}
+            </a>
+          </h3>
+        </li>
+      {% endunless %}
+    {% endfor %}
+  </ul>
+</div>
+
+## Review Notes
+
+<ul class="related-posts">
+  {% for note in site.notes %}
+    {% if note.categories contains 'eecs398' %}
+      <h3>
+        <a href="{{ note.url }}">
+          {{ note.title }}
+        </a>
+      </h3>
+    {% endif %}
+  {% endfor %}
+
+  <h3>
+    <a href="/resources/cheatsheets/eecs281_cheatsheet.pdf">
+      Data Structures and Algorithms
+    </a>
+  </h3>
+
+  <h3>
+    <a href="/resources/cheatsheets/eecs311_cheatsheet.pdf">
+      Electronic Circuits
+    </a>
+  </h3>
+
+  <h3>
+    <a href="/resources/cheatsheets/vp240_cheatsheet.pdf">
+      General Physics II
+    </a>
+  </h3>
+
+  <h3>
+    <a href="/resources/cheatsheets/eecs492_cheatsheet.pdf">
+      Intro. to Artificial Intelligence
+    </a>
+  </h3>
+
+  <h3>
+    <a href="/resources/cheatsheets/eecs370_cheatsheet.pdf">
+      Intro. to Computer Organization
+    </a>
+  </h3>
+
+  <h3>
+    <a href="/resources/cheatsheets/ve215_cheatsheet.pdf">
+      Intro. to Electronic Circuits
+    </a>
+  </h3>
+
+  {% for note in site.notes %}
+    {% if note.categories contains 'eecs482' %}
+      <h3>
+        <a href="{{ note.url }}">
+          {{ note.title }}
+        </a>
+      </h3>
+    {% endif %}
+  {% endfor %}
+
+  <h3>
+    <a href="/resources/cheatsheets/ve216_cheatsheet.pdf">
+      Intro. to Signals and Systems
+    </a>
+  </h3>
+
+  <h3>
+    <a href="/resources/cheatsheets/ve401_cheatsheet.pdf">
+      Probabilistic Methods in Engineering
+    </a>
+  </h3>
+
+</ul>
+

@@ -2,7 +2,6 @@
 layout: post
 title:  "Git Cheat Sheet"
 categories: git cheatsheet
-published: true
 ---
 
 # Git Cheat Sheet
