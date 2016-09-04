@@ -20,7 +20,9 @@ author:
 collections:
   posts:
     output:        true
-    permalink:     date #/:categories/:year/:month/:day/:title.html
+    #permalink:     date #/:categories/:year/:month/:day/:title.html
+    #permalink:     pretty #/:categories/:year/:month/:day/:title/
+    relative_permalinks: true
   notes:
     output:        true
     permalink:     /notes/:path/
@@ -30,10 +32,6 @@ markdown:          kramdown
 kramdown:
   input:           GFM # Enable GitHub Flavored Markdown (fenced code blocks)
 highlighter:       pygments
-
-# Permalinks
-#permalink:        pretty #/:categories/:year/:month/:day/:title/
-#relative_permalinks: true
 
 # Setup
 paginate:          5
