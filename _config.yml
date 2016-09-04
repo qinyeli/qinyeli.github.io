@@ -31,7 +31,7 @@ collections:
 markdown:          kramdown
 kramdown:
   input:           GFM # Enable GitHub Flavored Markdown (fenced code blocks)
-highlighter:       pygments
+#highlighter:       pygments
 
 # Setup
 paginate:          5
