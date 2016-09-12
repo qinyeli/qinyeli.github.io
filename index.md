@@ -99,9 +99,6 @@ My name is Qinye Li /\*pronounced Chin-yeah\*/, or you can also call me Sindy if
 
 I am a senior student studying computer science at the [University of Michigan - Ann Arbor](https://www.umich.edu/).
 
-
-I speak Chinese, Japanese, English, and a little little little bit of French. Oh, I mean `C/C++` is my mother-tongue, but I also
-speak `Java`, `JavaScript`, `Python`, `Swift`.
-
+I speak Chinese, Japanese, English, and a little little little bit of French. Oh, I mean `C/C++` is my mother-tongue, but I also speak `Java`, `JavaScript`, `Python`, `Swift`.
 
 <BR>&nbsp;<BR> 
