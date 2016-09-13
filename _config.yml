@@ -20,9 +20,12 @@ author:
 collections:
   posts:
     output:        true
-    #permalink:     date #/:categories/:year/:month/:day/:title.html
+    permalink:     date #/:categories/:year/:month/:day/:title.html
     #permalink:     pretty #/:categories/:year/:month/:day/:title/
     relative_permalinks: true
+  cheatsheets:
+    output:        true
+    permalink:     /cheatsheets/:path/
   notes:
     output:        true
     permalink:     /notes/:path/
@@ -34,6 +37,7 @@ kramdown:
 #highlighter:       pygments
 
 # Setup
+paginate_path:     "/blogs/page:num/"
 paginate:          5
 
 # Plugins

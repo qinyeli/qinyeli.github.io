@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Computing for Computer Scientists"
-categories: course eecs398
+categories: course eecs398 cheatsheet
 ---
 
 # EECS398 Computing for Computer Scientists -- Final Cheat Sheet

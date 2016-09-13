@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Intro. to Operating Systems"
-categories: course eecs482
+categories: course eecs482 cheatsheet
 ---
 
 # EECS482 Operating System -- Review
