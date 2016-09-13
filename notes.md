@@ -4,16 +4,31 @@ title:  Notes
 navigation_weight: 5
 ---
 
-## Cheat Sheets for Tools
 
 <div class="related" name="blog-content">
   <ul class="related-posts">
     {% for note in site.notes %}
-      {% unless note.categories contains 'course' %}
+      <li>
+        <h3>
+          <a href="{{ note.url }}">
+            {{ note.title }}
+          </a>
+        </h3>
+      </li>
+    {% endfor %}
+  </ul>
+</div>
+
+## Cheat Sheets for Tools
+
+<div class="related" name="blog-content">
+  <ul class="related-posts">
+    {% for cheatsheet in site.cheatsheets %}
+      {% unless cheatsheet.categories contains 'course' %}
         <li>
           <h3>
-            <a href="{{ note.url }}">
-              {{ note.title }}
+            <a href="{{ cheatsheet.url }}">
+              {{ cheatsheet.title }}
             </a>
           </h3>
         </li>
@@ -22,14 +37,14 @@ navigation_weight: 5
   </ul>
 </div>
 
-## Review Notes
+## Review Notes for Courses
 
 <ul class="related-posts">
-  {% for note in site.notes %}
-    {% if note.categories contains 'eecs398' %}
+  {% for cheatsheet in site.cheatsheets %}
+    {% if cheatsheet.categories contains 'eecs398' %}
       <h3>
-        <a href="{{ note.url }}">
-          {{ note.title }}
+        <a href="{{ cheatsheet.url }}">
+          {{ cheatsheet.title }}
         </a>
       </h3>
     {% endif %}
@@ -71,11 +86,11 @@ navigation_weight: 5
     </a>
   </h3>
 
-  {% for note in site.notes %}
-    {% if note.categories contains 'eecs482' %}
+  {% for cheatsheet in site.cheatsheets %}
+    {% if cheatsheet.categories contains 'eecs482' %}
       <h3>
-        <a href="{{ note.url }}">
-          {{ note.title }}
+        <a href="{{ cheatsheet.url }}">
+          {{ cheatsheet.title }}
         </a>
       </h3>
     {% endif %}
