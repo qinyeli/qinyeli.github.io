@@ -2,6 +2,7 @@
 layout: post
 title:  "Web Databases & Information Systems Note"
 categories: note web html css javascript
+published: false
 ---
 
 # Everything you need to know about how the web works!
