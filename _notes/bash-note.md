@@ -4,8 +4,6 @@ title:  "Bash Note (for stress test scripting)"
 categories: bash note
 ---
 
-# Bash Note (mainly for stress test scripting)
-
 ## For Loop
 
 ```bash

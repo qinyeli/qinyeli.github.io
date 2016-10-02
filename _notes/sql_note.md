@@ -4,35 +4,23 @@ title:  "SQL Note for sqlplus"
 categories: sql note
 ---
 
-# SQL Note for sqlplus
+* Table of Content
+{:toc}
+
+## Starting and Quitting
+```sql
+sqlplus; to start
+START filename; to load an .sql file
+QUIT; to quit
+```
 
 ## Data Type
-* INTEGER
+* INTEGER (Built-in type by Oracle; always slowers)
+* NUMBER
 * VARCHAR2
 * TIMESTAMP
 
-## Setting
-```sql
-SET colsep '|'
-SET line 10000
-SET ECHO ON
-START filename
-```
-
-## Show All Tables
-
-```sql
-SELECT owner, table_name FROM all_tables WHERE owner='QINYELI';
-```
-
-## Finding Schema of a Table
-
-```sql
-DESC <TableName>
-```
-
 ## Commenting
-
 ```sql
 ; This is a comment
 /*
@@ -41,10 +29,43 @@ DESC <TableName>
  */
 ```
 
+## Setting
 ```sql
-CREATE DATABASE test
-USE test
+SET colsep '|'
+SET line 10000
+SET ECHO ON
 ```
+
+## Show All Tables
+```sql
+SELECT owner, table_name FROM all_tables WHERE owner='QINYELI';
+```
+
+## Show Table Size
+```sql
+SELECT COUNT(*) FROM tablename
+
+```
+
+## Finding Schema of a Table
+
+```sql
+DESC <TableName>
+```
+
+## Comparing Two Tables
+```sql
+SELECT * FROM A
+MINUS
+SELECT * FROM B;
+
+SELECT * FROM B
+MINUS
+SELECT * FROM A;
+```
+
+Both of the queris should select 0 rows if the tables are identical.
+
 
 ## Creating Table
 
@@ -54,12 +75,19 @@ CREATE TABLE celebs (
     name TEXT,
     age INTEGER
 );
+```
+
+## Inserting
+```sql
 INSERT INTO celebs (id, name, age) VALUES (1, 'Justin Bieber', 21);
 SELECT * FROM celebs;
 SELECT name FROM celebs;
 
 ALTER TABLE celebs ADD COLUMN twitter_handle TEXT;
+```
 
+## Updating
+```
 UPDATE celebs
 SET age = 22
 WHERE id = 1;
@@ -67,9 +95,60 @@ WHERE id = 1;
 UPDATE celebs 
 SET twitter_handle = '@taylorswift13' 
 WHERE id = 4; 
+```
 
+## Deleting
+```sql
 DELETE FROM celebs WHERE twitter_handle IS NULL;
 ```
+
+## Clearing
+```sql
+TRUNCATE TABLE A
+```
+
+## Set Manipulation
+
+* Always do it on a key!
+
+```sql                    
+UNION (elimiates duplicates)
+ALL UNION (keep duplicates)
+```
+
+
+```sql
+INTERSECT 
+```
+
+## Output Redirection
+```sql
+spool info.csv
+-- query here!
+spool off
+```
+
+## Aggregate Operators
+
+* `COUNT`
+* `SUM`
+* `AVG`
+* `MAX`
+* `MIN`
+These operators take a column name as input
+
+* `ROUND` takes a column name and the number of decimal places as input
+e.g.
+
+```sql
+SELECT S.name
+FROM Sailors S
+WHERE S.age =
+    (SELECT MAX(S2.age) FROM Sailors S2);
+```
+
+
+## Selecting
 
 ```sql
 SELECT DISTINCT genre FROM movies;
@@ -167,19 +246,43 @@ LIMIT lets you specify the maximum number of rows that the query will return. Th
 COUNT takes the name of a column(s) as an argument and counts the number of rows where the value(s) is not NULL.
 GROUP BY is a clause used with aggregate functions to combine data from one or more columns.
 
-SUM() takes the column name as an argument and returns the sum of all the values in that column.
-MAX() takes the column name as an argument and returns the largest value in that column.
-MIN() takes the column name as an argument and returns the smallest value in that column.
-AVG() takes a column name as an argument and returns the average value for that column.
-ROUND() takes two arguments, a column name and the number of decimal places to round the values in that column.
-Report a Bug
 
-INNER JOIN will combine rows from different tables if the join condition is true.
-LEFT OUTER JOIN will return every row in the left table, and if the join condition is not met, NULL values are used to fill in the columns from the right table.
+```
+
+## Joining
+
+* `INNER JOIN` combines rows from different tables if the condition is true.
+* `LEFT OUTER JOIN` will return every row in the left table, and if the join condition is not met, NULL values are used to fill in the columns from the right table.
+* `RIGHT OUTER JOIN`
+* `FULL OUTER JOIN`
+
+
+## Renaming
+```sql
 AS is a keyword in SQL that allows you to rename a column or table in the result set using an alias.
 ```
 
+## Ordering
 
+```sql
+SELECT S.name, S.age
+FROM Sailors S
+ORDER BY S.age [ASC]
+```
+
+```sql
+SELECT S.name, S.age
+FROM Sailors S
+ORDER BY S.age DESC
+```
+
+# For sqlite
+```sql
+CREATE DATABASE test
+USE test
+```
+
+```sql
 show tables
 select database()
 
@@ -194,3 +297,35 @@ mysql> GRANT ALL PRIVILEGES ON *.* TO 'finley'@'localhost'
  service mysqld start
  service mysqld stop
  service mysqld restart
+```
+
+## Having
+```sql
+SELECT S.rating, MIN(S.age)
+FROM Sailors S
+WHERE S.age >= 18
+GROUP BY S.rating
+HAVING COUNT (*) >= 2
+```
+
+## Grouping
+```sql
+SELCT MIN(S.age), S,rating
+FROM Sailors S
+GROUP BY S.rating
+```
+* Print result one row for each group
+
+
+```sql
+SELECT DISTINCT S.sid FROM
+Sailors S, Sailors S2 WHERE
+S.rating > S2.rating AND
+S2.name = 'Join';
+
+SELECT S.name
+FROM Sailor S
+WHERE S.rating > ANY(SELECT S2.rating
+    FROM Sailor S2
+    WHERE S2.name = 'Horatio')
+```

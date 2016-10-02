@@ -5,8 +5,6 @@ categories: java note
 published: true
 ---
 
-# Java Note by a C++ Programmer
-
 * Table of Content
 {:toc}
 
