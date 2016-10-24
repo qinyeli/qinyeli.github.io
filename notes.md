@@ -96,6 +96,16 @@ navigation_weight: 5
     {% endif %}
   {% endfor %}
 
+  {% for cheatsheet in site.cheatsheets %}
+    {% if cheatsheet.categories contains 'eecs445' %}
+      <h3>
+        <a href="{{ cheatsheet.url }}">
+          {{ cheatsheet.title }}
+        </a>
+      </h3>
+    {% endif %}
+  {% endfor %}
+
   <h3>
     <a href="/resources/cheatsheets/ve216_cheatsheet.pdf">
       Intro. to Signals and Systems
