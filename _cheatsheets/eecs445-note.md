@@ -1,23 +1,9 @@
----
+<!-----
 layout: post
 title:  "Intro. to Machine Learning"
 categories: course eecs445 cheatsheet
 ---
-
-```
-Basic probability and statistics
-	Marginal and conditional probability
-	Independence
-	Bayes rule
-	Expectation, variance, etc.
-Basic Linear Algebra, Multivariable Calculus, Convex Functions
-	Linear independence
-	Eigenvalues
-	Vector derivatives
-	Definition of Convexity
-	Gradient descent + Stochastic Gradient Descent
-	Newton's method
-```
+-->
 
 ## Overview
 
@@ -25,32 +11,40 @@ Basic Linear Algebra, Multivariable Calculus, Convex Functions
 	* Continuous-valued labels: Regression
 	* Discrete-valued labels: Classification
 
-* Linear classfiers
-	* Generative models
-		* e.g. Naive Bayes
-		* Learns class-conditional probability $$P(X \vert Y)$$ and lable densities $$P(Y)$$ from traning data
-		* Require discrete data
-		* $$y = \mathrm{argmax}_{k}P(X = x^{new} \vert Y = k)P(Y =  k)$$
+* Linear classifiers
+	* Generative models (e.g. Naive Bayes): $$y = \mathrm{argmax}_{k}P(X = x^{new} \vert Y = k)P(Y =  k)$$
 
-	* Discriminative models
-		* e.g. Logisitic regression, Perceptron
-		* Learns posterior $$P(Y \vert X)$$ directly from training data
-		* $$y = \mathrm{argmax}_{k}P(X = x^{new} \vert Y = k)$$
+	* Discriminative models (e.g. Logisitic Regression, Perceptron): $$y = \mathrm{argmax}_{k}P(X = x^{new} \vert Y = k)$$
 		
-* Non-linear classfiers: Decision tree
+* Non-linear classifiers (e.g. Decision Tree)
 
-### Underfitting vs. Overfitting
-* Underfitting: fits training data and testing data badly
-* Overfitting: fits training data well but testing data badly; coefficients would be huge
-* As data size increases, overfitting diminishes
+### Variance vs. Bias
 
+* $$E[y] = f, \quad \mathrm{Var}[y] = E[\epsilon^2] = \sigma^2$$
+* $$E[(y - \hat{f})] = \sigma^2 + \mathrm{Var}[\hat{f}] + E[f - E_S[\hat{f}]]^2 = \text{error + variance + bias^2}$$
 
+* High variance low bais
+	* Overfitting; poor generalization
+	* Decrease the number of features
+	* Increase the data set size
+	* Increase regularization
 
+* High bais low variance
+	* Underfitting; model is too simplistic
+	* May give better generalization performance
 
+### Loss functions and bias-variance tradeoff
+* Quadratic loss: $$L(y, \hat{f}) = (y - \hat{f})^2$$
+* Absolute loss: $$L(y, \hat{f}) = \vert y - \hat{f} \vert$$
+* Sigmoid loss: $$L(y, \hat{f}) = \mathrm{sigmoid}(- y\hat{f})$$
+* Zero-one loss: $$L(y, \hat{f}) = I(y \not = \hat{f})^2$$
+* Hinge loss:$$ L(y, \hat{f}) = \max(0, 1 - y\hat{f})$$
+* Logistic loss:$$ L(y, \hat{f}) = \log(1 + \exp(-y\hat{f}))$$
+* Exponential loss: $$L(y, \hat{f}) = \exp(-y\hat{f})$$
+* Risk is the expected loss
 
 ## Linear Regression
 
-### Notations
 * $$x_n \in \mathbb{R}^D$$: nth data
 * $$\phi(x_n) = (\phi_1(x_n), ..., \phi_M(x_n)) \in \mathbb{R}^M$$: features for data $$x_n$$
 * $$t = (t_1, ..., t_N) \in \mathbb{R}^N$$: target
@@ -75,9 +69,9 @@ Basic Linear Algebra, Multivariable Calculus, Convex Functions
 * Regular least squares regression is just MLE
 * Regularized least squares regression is just MAP
 
-* MLE: $$\theta_{MLE} = \mathrm{argmax}\prod_{n = 1}^N p(t_n \perp \theta)$$
+* MLE: $$\theta_{MLE} = \mathrm{argmax}\prod_{n = 1}^N p(t_n \vert \theta)$$
 
-* MAP: $$\theta_{MAP} = \mathrm{argmax}\prod_{n = 1}^N p(\theta \perp t_n) = \mathrm{argmax}\prod_{n = 1}^N p(t_n \perp \theta)p(\theta)$$
+* MAP: $$\theta_{MAP} = \mathrm{argmax}\prod_{n = 1}^N p(\theta \vert t_n) = \mathrm{argmax}\prod_{n = 1}^N p(t_n \vert \theta)p(\theta)$$
 	
 Assume that $$\epsilon \sim N(0, \beta^{-1}I)$$ and $$w \sim N(0, \alpha^{-1}I)$$, we have $$\lambda = \frac{\alpha}{\beta}$$
 
@@ -98,18 +92,15 @@ $$
 
 ### Binary classification
 
-* **Sigmoid function**
-	* $$\sigma(a) = \frac{1}{1 + e^{-a}} = \frac{e^a}{1 + e^a}$$
-* We want to pick the larger one of $$P(y = 1\ |\ x)$$ and $$P(y = 0\ |\ x)$$
-* $$a = \ln\frac{P(y = 1\ |\ x)}{P(y = 0\ |\ x)} \Rightarrow P(y = 1\ |\ x) = \sigma(a), \quad P(y = 0\ |\ x) = 1 - \sigma(a)$$
+* **Sigmoid function**: $$\sigma(a) = \frac{1}{1 + \exp(-a)} = \frac{\exp(a)}{1 + \exp(a)}$$
+* We want to pick the larger one of $$P(y = 1 \vert x)$$ and $$P(y = 0 \vert x)$$
+* $$a = \ln\frac{P(y = 1 \vert x)}{P(y = 0 \vert x)} \quad \Rightarrow \quad P(y = 1 \vert x) = \sigma(a),\ P(y = 0 \vert x) = 1 - \sigma(a)$$
 
-* Likelihood
-	* $$P(y_n\ |\ x, w) = \sigma(w^T \phi(x))^{y_n} \cdot (1 - \sigma(w^T \phi(x)))^{y_n}$$
-	* $$P(y = t|x, w) = \prod_{n = 1} ^N P(y_n\ |\ x, w)$$
+* Likelihood: $$P(y = t \vert x, w) = \prod_{n = 1} ^N \sigma(w^T \phi(x))^{ts_n} \cdot (1 - \sigma(w^T \phi(x)))^{1 - t_n}$$
 
 *  Negative log-likelihood loss
 	* $$\begin{aligned}
-	E(w) &= -\ln P(y = t\ |\ X, w)\\ &= \sum_{n = 1}^N \left(
+	E(w) &= -\ln P(y = t\vert X, w)\\ &= \sum_{n = 1}^N \left(
 	t_n \ln (1 + \exp(-w^T \phi(x_n))) + (1 - t_n) \ln (1 + \exp(w^T \phi(x_n)))
 	\right)
 	\end{aligned}$$
@@ -124,80 +115,66 @@ $$
 	* $$x_{n+1} = x_n - \frac{f'(x_n)}{f''(x_n)}$$ (to find the stationary point)
 	* $$x_{n+1} = x_n - (\nabla^2 f(x_n))^{-1}\ \nabla_xf(x_n)$$ (for multidimensional case)
 
-
-* No closed-form solution exists
-
 ### Multi-class classification
-* **Softmax / Normalized exponential**
-	* $$p_k = \frac{e^{q_k}}{\sum_j e^j}$$
+* **Softmax / Normalized exponential**: $$p_k = \frac{e^{q_k}}{\sum_j e^j}$$
 
-* Let $$W = w_{k = 1} ^K$$ (learned by MLE)
-* $$P(y = j| x, W) = \frac{\exp(w_j^T\phi(w))}{\sum_{k = 1}^T w_k^T \phi(w)}$$
-* Classification: $$y = \mathrm{argmax}_jP(y = j \perp x, W)$$
+* Let $$W = w_{k = 1} ^K$$ (learned by MLE), $$P(y = j \vert x, W) = \frac{\exp(w_j^T\phi(w))}{\sum_{k = 1}^T w_k^T \phi(w)}$$
+* Prediction: $$y = \mathrm{argmax}_jP(y = j \vert x, W)$$
 
 
 
 ## Naive Bayes
 * Assumption: conditionally independent
-
 * $$C$$: number of classes
 * $$D$$: number of features
 * $$M$$: number of values each features can take
 * $$\pi = (\pi_1, ..., \pi_C) \in \Delta^C$$: (class) priors 
 	* The probability of $$y$$ to be in catagory $$c$$ is $$\pi_c$$
 * $$\theta_{cd} = (\theta_{cd1}, ..., \theta_{cdM}) \in \Delta^M$$: posteriors / class-conditional probability 
-	* Given that $$y$$ is in catagory $$c$$, the probability of $$x_d$$ to be in catagory $$m$$ is $$\theta_{cdm}$$
+	* Given $$y$$ is in catagory $$c$$, the probability of $$x_d$$ to be in catagory $$m$$ is $$\theta_{cdm}$$
 
-* $$y = \mathrm{argmax}_c P(y\ |\ x, \theta)= \mathrm{argmax}_c\ \pi_c\prod_{d = 1}^D \prod_{m = 1}^M \theta_{cdm}^{1(m = x_d^{new})}$$
+* Prediction: $$y = \mathrm{argmax}_c P(y \vert x, \theta)= \mathrm{argmax}_c\ \pi_c\prod_{d = 1}^D \prod_{m = 1}^M \theta_{cdm}^{1(m = x_d^{new})}$$
 
 **How to get $$\pi$$ and $$\theta$$?**
 
 ### MLE
-* $$single\ likelihood = P((x_i, y_i)\ |\ \pi, \theta) = \prod_c \pi_c^{1(y_i = c)}
+* $$single\ likelihood = P((x_i, y_i)\vert \pi, \theta) = \prod_c \pi_c^{1(y_i = c)}
 \cdot \prod_c \prod_d \prod_m \theta_{cdm}^{1(x_{nd} = m)1(y_n = c)}
 $$
 * $$\begin{split}
-log\ likelihood &= \log P(D\ |\ \pi, \theta)\\
+log\ likelihood &= \log P(D\vert \pi, \theta)\\
 &= \prod_n\prod_c 1(y_n = c)\log\pi_c + \prod_n\prod_c\prod_d\prod_m 1(x_{nd} = m)1(y_n = c)\log\theta_{cdm}
 \end{split}$$
-* $$\hat{\pi}_c = \frac{N_c}{N}$$
-* $$\hat{\theta }_{cdm} = \frac{N_{cdm}}{N}$$
+* $$\hat{\pi}_c = \frac{N_c}{N}, \hat{\theta }_{cdm} = \frac{N_{cdm}}{N}$$
 
 
 ### MAP
-Problem occurs when
 
-* A word occurs in every training samples
-* Black Swan Paradox: a word never appears in training
-
-Dirichlet priors
-
-* $$p(u; \alpha) = Z(\alpha)u_1^{\alpha_1 - 1} \cdots u_M^{\alpha_M - 1}$$
-* $$Z(\alpha)$$ is the normalization constant
+Dirichlet priors: $$p(u; \alpha) = Z(\alpha)u_1^{\alpha_1 - 1} \cdots u_M^{\alpha_M - 1}$$
+($$Z(\alpha)$$ is the normalization constant)
 
 Assuming a Dirichlet distribution for parameters
 
 * $$\pi \sim \mathrm{Dirichlet}(\alpha_1, ..., \alpha_C), \quad \theta_{cd} \sim \mathrm{Dirichlet}(\beta_{cd1}, ..., \beta_{cdM})$$
 * $$\hat{\pi}_c = \frac{N_c + \alpha_c - 1}{N + \sum_{i = 1}^C(\alpha_i - 1)}, \quad \hat{\theta }_{cdm} = \frac{N_{cdm} + \beta_{cdm} - 1}{N_c + \sum_{i = 1}^M (\beta_{cdi - 1})}$$
-* $$\alpha, \beta$$ can be seen as pseudocounts. Called Laplace Smoothing when they are all 1
+* $$\alpha, \beta$$ can be seen as pseudocounts. Called Laplace Smoothing when all 1
 
 #### Mean Estimates
-* $$\pi|D \sim \mathrm{Dirichlet (N_1 + \alpha_1, ..., N_C + \alpha_c)}$$
-* $$\theta_{cd}|D \sim \mathrm{Dirichlet} (N_{cd1} + \beta_{cd1}, ..., N_{cdM} + \beta_{cdM})$$
+* $$\pi|D \sim \mathrm{Dirichlet (N_1 + \alpha_1, ..., N_C + \alpha_c)}, \quad \theta_{cd}|D \sim \mathrm{Dirichlet} (N_{cd1} + \beta_{cd1}, ..., N_{cdM} + \beta_{cdM})$$
 * $$\hat{\pi}_c = \frac{N_c + \alpha_c}{N + \sum_{i = 1}^C \alpha_i}, \quad \hat{\theta }_{cdm} = \frac{N_{cdm} + \beta_{cdm}}{N_c + \sum_{i = 1}^M \beta_{cdi})}$$
  
 	
 ## Support Vector Machine
 
-* Hyperplane: $$H = \{x: w^T x + b = 0\}$$
-* Distance between a point $$z$$ and the hyperplane $$H$$:
-	* $$\text{Writing } z \text{ as } z = z_0 + r \cdot \frac{w}{||w||}, \text{ where } z_0 \in H,\ r\cdot\frac{w}{||w||} \perp H$$
-	* $$|r| = \frac{|w^T z + b|}{||w||}$$
-* Classification: $$y = \mathrm{sign}(w^T x + b)$$
+* Hyvertlane: $$H = \{x: w^T x + b = 0\}$$
+* Writing $$z$$ as $$z = z_0 + r \cdot \frac{w}{||w||}$$, where $$z_0 \in H,\ r\cdot\frac{w}{||w||} \perp H
+\quad \Rightarrow\quad$$ distance $$|r| = \frac{|w^T z + b|}{||w||}$$
+* Prediction: $$y = \mathrm{sign}(w^T x + b)$$
 * Functional **margin**: $$\rho = \min\limits_{i}\frac{w^T x_i + b}{\|w\|}$$
 
 
 ### Hard-Margin SVM
+
 $$
 \begin{split}
 \underset{w, b}{\text{minimize}} \quad & \frac{1}{2}{\| w \|}^2\\\
@@ -206,7 +183,8 @@ $$
 \end{split}
 $$
 
-### Optimal Soft-Margin Hyperplane
+### Optimal Soft-Margin Hyvertlane
+
 $$
 \begin{split}
 \underset{w, b, \xi}{\text{minimize}} \quad & \frac{1}{2}{\| w \|}^2 + \frac{C}{n} \sum_{i = 1}^n \xi_i\\
@@ -244,45 +222,6 @@ $$
 
 
 
-## Loss functions and bias-variance tradeoff
-* Regression loss function
-	* Quadratic loss: $$L(y, \hat{f}) = (y - \hat{f})^2$$
-	* Absolute loss: $$L(y, \hat{f}) = \perp y - \hat{f} \perp$$
-* Classification loss function
-	* Sigmoid loss: $$L(y, \hat{f}) = \mathrm{sigmoid}(- y\hat{f})$$
-	* Zero-one loss: $$L(y, \hat{f}) = I(y \not = \hat{f})^2$$
-	* Hinge loss:$$ L(y, \hat{f}) = \max(0, 1 - y\hat{f})$$
-	* Logistic loss:$$ L(y, \hat{f}) = \log(1 + \exp(-y\hat{f}))$$
-	* Exponential loss: $$L(y, \hat{f}) = \exp(-y\hat{f})$$
-
-* Risk is the expected loss or error
-
-
-* Variance
-	* Captures how much a learning method moves around the mean.
-	* How different can one expect the hypotheses of a given model to be?
-	* How sensitive is an estimator to different training sets?
-	* High variance model
-		* Model represents the training set well
-		* Overfit to noise or unrepresentative training data
-		* Poor generalization performance
-
-* Bais
-	* Captures the errors caused by the simplifying assumptions of a model
-	* Captures the average errors of a model across different training sets
-	* High bais model
-		* Simplistic models
-		* Fail to capture regularities in the data
-		* May give better generalization performance
-
-* Simple models have high bias and low variance (underfitting)
-* Complex models have low bias and high variance (overfitting)
-
-
-* $$E[y] = f, \quad \mathrm{Var}[y] = E[\epsilon^2] = \sigma^2$$
-* $$E[(y - \hat{f})] = \sigma^2 + \mathrm{Var}[\hat{f}] + E[f - E_S[\hat{f}]]^2 = \text{error + variance + bias^2}$$
-
-
 
 ## Information Theory
 
@@ -303,8 +242,7 @@ $$
 	* Measures the number of extra bits needed to encode messages from $$p$$ when we use a code optimal for $$q$$
 
 * **Mutual Information**: $$I(X; Y) = \sum_{x \in X} \sum_{y\in Y} p(x,y) \log\frac{p(x,y)}{p(x)p(y)} = D_{KL}(p(x, y) \| p(x)p(y))$$
-	* Measures how dependent $$X$$ and $$Y$$ are
-	* $$X$$ and $$Y$$ are independent iff $$I(X; Y) = 0$$
+	* Measures how dependent $$X$$ and $$Y$$ are (independent iff $$I(X; Y) = 0$$)
 
 * **Pointwise mutual information**: $$\mathrm{pmi} (x; y) = \frac{p(x,y)}{p(x)p(y)}$$
 	* Measures to the extent $$x$$ and $$y$$ co-occur more frequently than expected
@@ -312,9 +250,9 @@ $$
 
 ## Decision Tree
 
-* **Conditional entropy**: $$H(Y|X) = \sum_{x \in X}H(Y \perp X = x) = \sum_{x \in X}\sum_{y \in Y} p(x,y) \log\frac{p(x)}{p(x,y)}$$
+* **Conditional entropy**: $$H(Y \vert X) = \sum_{x \in X}H(Y \vert X = x) = \sum_{x \in X}\sum_{y \in Y} p(x,y) \log\frac{p(x)}{p(x,y)}$$
 
-* **Information gain**: $$IG(P, a) = H(P) - H(P \perp a)$$
+* **Information gain**: $$IG(P, a) = H(P) - H(P \vert a)$$
 	* Information gain  = entropy(parent) - weighed sum of entropy(child)
 	* Measures teh reduction in entropy gained iby observing an attribute
 	* Euivalent to mutual information $$IG(X, Y) = D_L(p(x, y) \| p(x)p(y))$$
