@@ -1,9 +1,8 @@
-<!-----
+---
 layout: post
 title:  "Intro. to Machine Learning"
 categories: course eecs445 cheatsheet
 ---
--->
 
 ## Overview
 
@@ -18,30 +17,21 @@ categories: course eecs445 cheatsheet
 		
 * Non-linear classifiers (e.g. Decision Tree)
 
-### Variance vs. Bias
-
-* $$E[y] = f, \quad \mathrm{Var}[y] = E[\epsilon^2] = \sigma^2$$
-* $$E[(y - \hat{f})] = \sigma^2 + \mathrm{Var}[\hat{f}] + E[f - E_S[\hat{f}]]^2 = \text{error + variance + bias^2}$$
+## Loss functions and bias-variance tradeoff
+* $$E[y] = f, \quad \mathrm{Var}[y] = E[\epsilon^2] = \sigma^2 \quad \Rightarrow \quad E[(y - \hat{f})] = \sigma^2 + \mathrm{Var}[\hat{f}] + E[f - E_S[\hat{f}]]^2 = \text{error + variance + bias^2}$$
 
 * High variance low bais
 	* Overfitting; poor generalization
-	* Decrease the number of features
-	* Increase the data set size
-	* Increase regularization
+	* Decrease the number of features; increase the data set size increase regularization
 
 * High bais low variance
-	* Underfitting; model is too simplistic
-	* May give better generalization performance
+	* Underfitting; may give better generalization performance
 
-### Loss functions and bias-variance tradeoff
-* Quadratic loss: $$L(y, \hat{f}) = (y - \hat{f})^2$$
-* Absolute loss: $$L(y, \hat{f}) = \vert y - \hat{f} \vert$$
-* Sigmoid loss: $$L(y, \hat{f}) = \mathrm{sigmoid}(- y\hat{f})$$
-* Zero-one loss: $$L(y, \hat{f}) = I(y \not = \hat{f})^2$$
-* Hinge loss:$$ L(y, \hat{f}) = \max(0, 1 - y\hat{f})$$
-* Logistic loss:$$ L(y, \hat{f}) = \log(1 + \exp(-y\hat{f}))$$
-* Exponential loss: $$L(y, \hat{f}) = \exp(-y\hat{f})$$
-* Risk is the expected loss
+* Loss functions
+	* Quadratic loss: $$L(y, \hat{f}) = (y - \hat{f})^2$$ &nbsp; &nbsp;  Absolute loss: $$L(y, \hat{f}) = \vert y - \hat{f} \vert$$ &nbsp; &nbsp; Sigmoid loss: $$L(y, \hat{f}) = \mathrm{sigmoid}(- y\hat{f})$$ &nbsp; &nbsp; Zero-one loss: $$L(y, \hat{f}) = I(y \not = \hat{f})^2$$
+	* Hinge loss:$$ L(y, \hat{f}) = \max(0, 1 - y\hat{f})$$ &nbsp; &nbsp; Logistic loss:$$ L(y, \hat{f}) = \log(1 + \exp(-y\hat{f}))$$
+&nbsp; &nbsp; Exponential loss: $$L(y, \hat{f}) = \exp(-y\hat{f})$$
+	* Risk is the expected loss
 
 ## Linear Regression
 
@@ -62,8 +52,7 @@ categories: course eecs445 cheatsheet
 * $$E(w) = \frac{1}{2}||\Phi w - t||^2 + \frac{\lambda}{2}w^T w = \frac{1}{2} w^T \Phi^T \Phi w - t^T \Phi w + \frac{1}{2} t^T t + \frac{\lambda}{2}w^T w$$
 * $$\nabla_w E(w) = (\Phi^T \Phi + \lambda I) w - \Phi^T t$$
 * $$\hat{w} = (\Phi^T \Phi + \lambda I)^{-1}\Phi^T t = \Phi^+ t$$
-* If $$\lambda = 0$$, and $$\Phi^T \Phi$$ is not invertible, $$\hat{w} = (\Phi^T \Phi)^+\Phi^T t = \Phi^+ t$$
-* If $$\lambda > 0$$, $$\Phi^T \Phi + \lambda I$$ is always invertible
+* If $$\lambda = 0$$, and $$\Phi^T \Phi$$ is not invertible, $$\hat{w} = (\Phi^T \Phi)^+\Phi^T t = \Phi^+ t$$; If $$\lambda > 0$$, $$\Phi^T \Phi + \lambda I$$ is always invertible
 
 ### Probablistic Interpretation
 * Regular least squares regression is just MLE
@@ -76,12 +65,7 @@ categories: course eecs445 cheatsheet
 Assume that $$\epsilon \sim N(0, \beta^{-1}I)$$ and $$w \sim N(0, \alpha^{-1}I)$$, we have $$\lambda = \frac{\alpha}{\beta}$$
 
 
-
-
-
-If $$x \sim N(0, \sigma^2), \quad p(x) = \frac{1}{\sqrt{2\pi\sigma^2}} \exp\left(\frac{x^2}{2\sigma^2}\right)$$
-
-If $$w \sim N(0, \sigma^2 I),\quad p(w) = \frac{1}{\left(\sqrt{2\pi\sigma^2}\right)^N} \exp\left(-\frac{1}{2\sigma^2 } \sum_{n=1}^N w_n^2\right)
+If $$x \sim N(0, \sigma^2), \quad p(x) = \frac{1}{\sqrt{2\pi\sigma^2}} \exp\left(\frac{x^2}{2\sigma^2}\right)$$; &nbsp; if $$w \sim N(0, \sigma^2 I),\quad p(w) = \frac{1}{\left(\sqrt{2\pi\sigma^2}\right)^N} \exp\left(-\frac{1}{2\sigma^2 } \sum_{n=1}^N w_n^2\right)
 $$
 
 
@@ -99,11 +83,10 @@ $$
 * Likelihood: $$P(y = t \vert x, w) = \prod_{n = 1} ^N \sigma(w^T \phi(x))^{ts_n} \cdot (1 - \sigma(w^T \phi(x)))^{1 - t_n}$$
 
 *  Negative log-likelihood loss
-	* $$\begin{aligned}
-	E(w) &= -\ln P(y = t\vert X, w)\\ &= \sum_{n = 1}^N \left(
+	* $$
+	E(w) = -\ln P(y = t\vert X, w) = \sum_{n = 1}^N \left(
 	t_n \ln (1 + \exp(-w^T \phi(x_n))) + (1 - t_n) \ln (1 + \exp(w^T \phi(x_n)))
-	\right)
-	\end{aligned}$$
+	\right)$$
 	* $$\nabla_w E(w) = \Phi^T(\sigma(\Phi w) - t)$$
 	* $$\nabla_w^2 E(w) = \sum_{n = 1}^N \phi(x_n)r_n(w)\phi(x_n)^T$$, where $$r_n(w) = \sigma(w^T \phi(x_n))\cdot (1 - \sigma(w^T \phi(x_n)))$$
 	* $$\nabla_w^2 E(w) = \Phi^T R(w)\Phi$$, where $$R(w) = \mathrm{diag}\{r_1(w), ..., r_N(w)\}$$
@@ -112,8 +95,7 @@ $$
 ### Newton's Method
 * Repeat until convergence
 	* $$x_{n+1} = x_n - \frac{f(x_n)}{f'(x_n)}$$ (to find the root)
-	* $$x_{n+1} = x_n - \frac{f'(x_n)}{f''(x_n)}$$ (to find the stationary point)
-	* $$x_{n+1} = x_n - (\nabla^2 f(x_n))^{-1}\ \nabla_xf(x_n)$$ (for multidimensional case)
+	* $$x_{n+1} = x_n - \frac{f'(x_n)}{f''(x_n)}$$ (to find the stationary point); $$x_{n+1} = x_n - (\nabla^2 f(x_n))^{-1}\ \nabla_xf(x_n)$$ (for multidimensional case)
 
 ### Multi-class classification
 * **Softmax / Normalized exponential**: $$p_k = \frac{e^{q_k}}{\sum_j e^j}$$
@@ -125,9 +107,7 @@ $$
 
 ## Naive Bayes
 * Assumption: conditionally independent
-* $$C$$: number of classes
-* $$D$$: number of features
-* $$M$$: number of values each features can take
+* $$C$$: number of classes; &nbsp; $$D$$: number of features; &nbsp; $$M$$: number of values each features can take
 * $$\pi = (\pi_1, ..., \pi_C) \in \Delta^C$$: (class) priors 
 	* The probability of $$y$$ to be in catagory $$c$$ is $$\pi_c$$
 * $$\theta_{cd} = (\theta_{cd1}, ..., \theta_{cdM}) \in \Delta^M$$: posteriors / class-conditional probability 
@@ -141,10 +121,10 @@ $$
 * $$single\ likelihood = P((x_i, y_i)\vert \pi, \theta) = \prod_c \pi_c^{1(y_i = c)}
 \cdot \prod_c \prod_d \prod_m \theta_{cdm}^{1(x_{nd} = m)1(y_n = c)}
 $$
-* $$\begin{split}
-log\ likelihood &= \log P(D\vert \pi, \theta)\\
-&= \prod_n\prod_c 1(y_n = c)\log\pi_c + \prod_n\prod_c\prod_d\prod_m 1(x_{nd} = m)1(y_n = c)\log\theta_{cdm}
-\end{split}$$
+* $$
+log\ likelihood = \log P(D\vert \pi, \theta)
+= \prod_n\prod_c 1(y_n = c)\log\pi_c + \prod_n\prod_c\prod_d\prod_m 1(x_{nd} = m)1(y_n = c)\log\theta_{cdm}
+$$
 * $$\hat{\pi}_c = \frac{N_c}{N}, \hat{\theta }_{cdm} = \frac{N_{cdm}}{N}$$
 
 
@@ -167,10 +147,10 @@ Assuming a Dirichlet distribution for parameters
 ## Support Vector Machine
 
 * Hyvertlane: $$H = \{x: w^T x + b = 0\}$$
-* Writing $$z$$ as $$z = z_0 + r \cdot \frac{w}{||w||}$$, where $$z_0 \in H,\ r\cdot\frac{w}{||w||} \perp H
-\quad \Rightarrow\quad$$ distance $$|r| = \frac{|w^T z + b|}{||w||}$$
+* Writing $$z$$ as $$z = z_0 + r \cdot \frac{w}{\|w\|}$$, where $$z_0 \in H,\ r\cdot\frac{w}{\|w\|} \perp H
+\quad \Rightarrow\quad$$ distance $$|r| = \frac{|w^T z + b|}{\|w\|}\quad \Rightarrow \quad$$ margin $$\rho = \min\limits_{i}\frac{w^T x_i + b}{\|w\|}$$
 * Prediction: $$y = \mathrm{sign}(w^T x + b)$$
-* Functional **margin**: $$\rho = \min\limits_{i}\frac{w^T x_i + b}{\|w\|}$$
+
 
 
 ### Hard-Margin SVM
@@ -183,7 +163,7 @@ $$
 \end{split}
 $$
 
-### Optimal Soft-Margin Hyvertlane
+### Optimal Soft-Margin Hyperplane
 
 $$
 \begin{split}
@@ -229,8 +209,7 @@ $$
 	* Measures how surprised we are by an outcome
 	* Measures the optimal code length, for messages drawn from $$p$$
  
-* **Entropy** of a discrete random variable $$X$$ with distribution $$p$$: $$H[X] = E[I[p(X)]] = -\sum_{x \in X} p(x)\log p(x)$$
-	* or $$H(p) = -\sum_{i} p_i \log_2 p_i$$
+* **Entropy** of a discrete random variable $$X$$ with distribution $$p$$: $$H[X] = E[I[p(X)]] = -\sum_{x \in X} p(x)\log p(x)$$ (or $$H(p) = -\sum_{i} p_i \log_2 p_i$$)
 	* If $$X$$ is binary, $$H[X] = -p\log p + (1 - p)\log(1 - p)$$
 	* Measures how surprised we are on average
 	* Highest when $$X$$ is close to uniform
@@ -246,7 +225,6 @@ $$
 
 * **Pointwise mutual information**: $$\mathrm{pmi} (x; y) = \frac{p(x,y)}{p(x)p(y)}$$
 	* Measures to the extent $$x$$ and $$y$$ co-occur more frequently than expected
-	* Used to find collocations
 
 ## Decision Tree
 
