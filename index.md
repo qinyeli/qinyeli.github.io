@@ -30,7 +30,7 @@ var en = new Greeting(
 	"Hello, night owl!");
 var ja = new Greeting(
 	"おはようございます！爽やかな朝ですね。",
-	"こんにちは。",
+	"こんにちは。^ ^",
 	"こんばんは、今日も一日お疲れ様です。",
 	"こんにちは。夜更かしは健康に良くないので、お早目に寝てくださいね。");
 var fr = new Greeting(
@@ -83,9 +83,9 @@ xmlhttp.onload = function(result) {
 	var display;
 	if (time >= 5 && time < 12) {
 		display = greeting.morning;
-	} else if (time >= 12 && time < 17) {
+	} else if (time >= 12 && time < 18) {
 		display = greeting.afternoon;
-	} else if (time >= 17 && time <= 23) {
+	} else if (time >= 18 && time <= 23) {
 		display = greeting.evening;
 	} else {
 		display = greeting.night;
