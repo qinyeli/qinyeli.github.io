@@ -36,3 +36,9 @@ clean:
 
 * `.PHONY` means that the target is phony. (i.e. the target does not correspond to a file)
 * `find -executable -name "test*"` finds executables whose name begin with "test". This is especially useful in deleting test case executables.
+
+## To specify the make file
+
+~~~
+$ make -f Makefile2
+~~~
