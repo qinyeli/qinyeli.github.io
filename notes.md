@@ -57,6 +57,12 @@ navigation_weight: 5
   </h3>
 
   <h3>
+    <a href="/resources/cheatsheets/eecs484_mid_cheatsheet.pdf">
+      Database Management Systems
+    </a>
+  </h3>
+
+  <h3>
     <a href="/resources/cheatsheets/eecs311_cheatsheet.pdf">
       Electronic Circuits
     </a>
