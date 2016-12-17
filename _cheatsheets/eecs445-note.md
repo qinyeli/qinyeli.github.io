@@ -233,9 +233,15 @@ $$
 * **Information gain**: $$IG(P, a) = H(P) - H(P \vert a)$$
 	* Information gain  = entropy(parent) - weighed sum of entropy(child)
 	* Measures teh reduction in entropy gained iby observing an attribute
-	* Euivalent to mutual information $$IG(X, Y) = D_L(p(x, y) \| p(x)p(y))$$
+	* Euivalent to mutual information $$IG(X, Y) = D_{KL}(p(x, y) \| p(x)p(y))$$
 
-* **Metrics / Misclassification error**: $$I(N) = 1 - \max\limits_i P(i \vert N)$$ for every query node $$N$$
-	* When the node provides no information, $$I(N) = \max I(N) = 1 - 1/K$$ ($$K$$ is the number of target classes)
+* **Metrics**:
+	* Entropy
+	* Misclassification error: $$ME(N) = 1 - \max\limits_i P(i \vert N)$$ for every query node $$N$$
+		* When the node provides no information, $$I(N) = \max I(N) = 1 - 1/K$$ ($$K$$ is the number of target classes)
+		* When all samples belong to one class, $$I(N) = \min I(N) = 0$$
+	* Gini Impurity
+		* Measures how often a randomly chosen element from the subset would be incorrectly labeled if randomly labeled according to the distribution of labels in the subset
+		* $$\sum_{i \not = k} f_i f_k$$
 
 
