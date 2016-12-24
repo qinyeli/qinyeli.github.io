@@ -45,8 +45,8 @@ var de = new Greeting(
 	"Guten tag!");
 var es = new Greeting(
 	"¡Buenos días!",
-	"¡Buenos tardes!",
-	"¡Buenos noches!",
+	"¡Buenas tardes!",
+	"¡Buenas noches!",
 	"¡Hola!");
 
 // Set the greeting language according to the visitor's location
