@@ -120,7 +120,41 @@ fmt.Println("%T", a) // Print the type
 const x = "Hello!"
 ```
 
+#### Type Conversion
+
+```go
+i := 3
+string(i)
+```
+
+### IO
+
+```go
+r := strings.NewReader(str)
+b := make([]byte, 8)
+for {
+	n, err := r.Read(b)
+	if err == io.EOF {
+		break
+	}
+}
+```
+
 ## Flow Control
+
+### String Manipulation
+
+#### Split
+
+```go
+f := func(c rune) bool {
+	return !unicode.IsLetter(c)
+}
+fmt.Printf("%q", strings.FieldsFunc(s, f))
+```
+
+#### [String -> Int](https://golang.org/pkg/strconv/)
+
 ### For
 
 ```go
@@ -266,6 +300,10 @@ elem, ok = m[key]
 
 * Zero value of a map is `nil`
 
+### List
+
+* [Linked List Example](https://www.socketloop.com/tutorials/golang-linked-list-example)
+
 
 ## Methods
 
@@ -296,9 +334,27 @@ func main() {
 ### Interface
 
 ```go
-// TODO
-// Figure out what Interface is...
-// https://tour.golang.org/methods/9
+type interfaceName interface() {
+	funcName() typeName
+}
+
+func (x typeName1) funcName() typeName {
+}
+
+func (x typeName2) funcName() typeName {
+}
+
+func main() {
+	var x interfaceName
+}
+```
+
+### Stringer
+
+```go
+type Stringer interface {
+	String() string
+}
 ```
 
 ## Concurrency
