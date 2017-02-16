@@ -233,7 +233,7 @@ defer fmt.Println("returning from the function")
 
 ## Data Structures
 
-### Struct
+### Structs
 
 ```go
 type Vertex struct {
@@ -300,7 +300,7 @@ elem, ok = m[key]
 
 * Zero value of a map is `nil`
 
-### List
+### Lists
 
 * [Linked List Example](https://www.socketloop.com/tutorials/golang-linked-list-example)
 
@@ -370,6 +370,9 @@ go func(x, y, z)
 * Sends and receives block until the other side is ready
 
 ```go
+var ch chan int
+ch = make(chan int)
+
 ch := make(chan int)
 ch <- v    // Send v to channel ch.
 v := <-ch  // Receive from ch, and
@@ -400,7 +403,7 @@ for {
 	select {
 	case c <- x:
 		x, y = y, x+y
-	case <-quit:
+	case <- quit:
 		fmt.Println("quit")
 		return
 	default:

@@ -116,6 +116,10 @@ String myStr = myIntegerObj.toString();
 // Each wrapper has the ability to convert its value to and from a String type
 ```
 
+#### String
+* To access the characters `str.charAt(index)`
+* To get the length `str.length()`
+
 ### Class attributes (member variables)
 Access modifiers
 
@@ -216,6 +220,8 @@ int [] arrayRef;
 arrayRef = new int[5];
 ```
 
+* To access elements in the array `arr.get(index)`
+* To get the size of the array `arr.length`
 * To iterate through the array
 
 ```java
