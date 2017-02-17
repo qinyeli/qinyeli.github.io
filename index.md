@@ -29,8 +29,8 @@ var en = new Greeting(
 	"Good evening!",
 	"Hello, night owl!");
 var ja = new Greeting(
-	"おはようございます！爽やかな朝ですね。",
-	"こんにちは。^ ^",
+	"おはようございます！爽やかな朝ですね。朝ごはんは、ちゃんと食べましたか？",
+	"こんにちは、もう午後ですね。^ ^　",
 	"こんばんは、今日も一日お疲れ様です。",
 	"こんにちは。夜更かしは健康に良くないので、お早目に寝てくださいね。");
 var fr = new Greeting(
@@ -97,8 +97,12 @@ xmlhttp.onload = function(result) {
 
 My name is Qinye Li /\*pronounced Chin-yeah\*/, or you can also call me Sindy if that is easier to remember. I am a senior student studying computer science at the [University of Michigan - Ann Arbor](https://www.umich.edu/).
 
-I speak Chinese, Japanese, English, and a little little little bit of French. Oh, I mean `C/C++` is my mother-tongue, but I also speak `Java`, `JavaScript`, `Python`, `Swift`.
+I speak Chinese, Japanese, English, and a little little little bit of French. Oh, I mean `C/C++` is my mother-tongue, but I also speak `Java`, `Python`, `JavaScript`, `Swift`. I am also learning `Go`!
 
-I like programming. Why? Well, becuase it makes me peaceful yet excited, desperate yet hopeful. It is sometimes frustrating, but I enjoy the process of being frustrated so much that I cannot give up.
+I am hacking with Unity and `C#` recently!  
+Check out my latest game ; ) --> [GuruGuru](/GuruGuru/index.html)
+
+<!--I like programming, becuase it makes me peaceful yet excited, desperate yet hopeful. It is sometimes frustrating, but I enjoy the process of being frustrated so much that I cannot give up.-->
+
 
 <BR>&nbsp;<BR> 
