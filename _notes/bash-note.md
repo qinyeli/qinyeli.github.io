@@ -37,7 +37,7 @@ done
 
 ## [Special Paramemters](http://www.thegeekstuff.com/2010/05/bash-shell-special-parameters/)
 
-## Others
+## Grep
 
 * Globally search "TODO"
 
@@ -45,8 +45,22 @@ done
 grep -n TODO *.*
 ```
 
+* Search recursively for files with .txt extension
+
+```bash
+grep -r --include "*.txt" .
+```
+
+## Others
+
 * Check 10 most used commands
 
-```
+```bash
 history | awk '{CMD[$2]++;count++;}END { for (a in CMD)print CMD[a] " " CMD[a]/count*100 "% " a;}' | grep -v "./" | column -c3 -s " " -t | sort -nr | nl |  head -n10
+```
+
+* To compress
+
+```bash
+tar -czvf name-of-archive.tar.gz /path/to/directory-or-file
 ```
