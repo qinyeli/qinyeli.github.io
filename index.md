@@ -95,7 +95,7 @@ xmlhttp.onload = function(result) {
 
 </script>
 
-My name is Qinye Li /\*pronounced Chin-yeah\*/, or you can also call me Sindy if that is easier to remember. I am a senior student studying computer science at the [University of Michigan - Ann Arbor](https://www.umich.edu/).
+My name is Qinye Li /\*pronounced Chin-yeah\*/, or you can also call me Sindy if that is easier to remember. I‘ve just graduated with a bachelor degree in CS from University of Michigan -- Ann Arbor in April. I am also expecting a bachelor degree in ECE from Shanghai Jiao Tong University this August. I am now back in Shanghai working for my capstone project.
 
 I speak Chinese, Japanese, English, and a little little little bit of French. Oh, I mean `C/C++` is my mother-tongue, but I also speak `Java`, `Python`, `JavaScript`, `Swift`. I am also learning `Go`!
 

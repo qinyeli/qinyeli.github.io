@@ -7,6 +7,9 @@ categories: python panda note
 * Table of Content
 {:toc}
 
+## Reminder
+After 3 hours of debugging pain, I realized that I need to keep a reminder for myself here that it is Panda*s*, not Panda.
+
 ## Basics
 ```python
 import pandas as pd
