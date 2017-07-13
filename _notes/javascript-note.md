@@ -5,6 +5,9 @@ categories: java note
 published: true
 ---
 
+* Table of Content
+{:toc}
+
 ## I/O
 
 ```javascript

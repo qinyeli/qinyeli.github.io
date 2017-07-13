@@ -12,6 +12,7 @@ categories: python numpy note
 ```python
 import numpy as np
 
+a = np.array([])
 a = np.array([1, 2, 3])
 a = np.array([1, 2, 3], [4, 5, 6])
 a = np.matrix('1, 2, 3; 4, 5, 6')

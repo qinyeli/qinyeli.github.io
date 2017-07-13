@@ -4,8 +4,6 @@ title:  "Python Note by a C++ Programmer"
 categories: python note
 ---
 
-# Python Note by a C++ Programmer
-
 * Table of Content
 {:toc}
 
@@ -166,69 +164,6 @@ class Cat:
         return self.name
 
 cat = Cat('David', 'black')
-```
-
-## Plotting
-
-```python
-x = np.linespace(0, 1, 100);
-y = x ** 2;
-plt.plot(x, y, 'r-', label = 'parabola')
-plt.legend()
-plt.xlabel("x")
-plot.ylabel("y")
-plt.show()
-```
-
-```
-# Create sample data with noise
-x = np.random.uniform(1, 100, 1000);
-y = np.log(x) + np.random,normal(0, 0.3, 1000)
-plt.scatter(x, y)
-plt.show()
-```
-
-### To pass in parameters
-
-```python
-import numpy as np
-import matplotlib.pyplot as plt
-import sys
-
-color=iter(plt.cm.rainbow(np.linspace(0,1,len(sys.argv) - 1)))
-
-for filename in sys.argv[1:]:
-    data = np.genfromtxt(filename)
-    y = np.arange(data.size)
-    c = next(color)
-    plt.plot(time, y, c = c, label = filename)
-
-plt.show()
-```
-
-### To plot log scale figure
-
-```python
-plt.semilogx(time, y)
-```
-
-### To save the figure
-
-```python
-# replace plt.show() with
-plt.savefig("figure.png")
-```
-
-### Subplot
-
-```python
-plt.subplot(2, 1, 1)
-plt.plot(x, y1)
-plt.title('y1')
-plt.subplot(2, 1, 2)
-plt.plot(x, y2)
-plt.title('y2')
-plt.show()
 ```
 
 ## Little Tricks
