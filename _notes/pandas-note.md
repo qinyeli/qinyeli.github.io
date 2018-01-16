@@ -8,9 +8,11 @@ categories: python panda note
 {:toc}
 
 ## Reminder
-After 3 hours of debugging pain, I realized that I need to keep a reminder for myself here that it is Panda*s*, not Panda.
+* After 3 hours of debugging pain, I realized that I need to keep a reminder for myself here that it is Panda*s*, not Panda.
+* Every column of a dataframe is called a series
 
-## Basics
+## I/O
+
 ```python
 import pandas as pd
 
@@ -26,17 +28,37 @@ X = df.as_matrix(['col1', 'col2']) # X is a numpy array
 pd.Series([1,2,3]).values # Gives a numpy array
 ```
 
+## Data Inspection
+
 ```python
 df.index # Returns all the index
 df.columns.values # Returns all the columns
 ```
 
+```python
+# Gives statistics about the whole data frame
+df_train_data_23.describe()
+```
+
+* For iteration
+```python
+for index, row in df.iterrows():
+    print (row["c1"], row["c2"])
+```
 
 ```python
-Sorted = df.sort_values(['Births'], ascending=False)
-
 # Maximum value in the data set
-MaxValue = df['Births'].max()
+MaxValue = df['col'].max()
+```
+
+## Manipulation
+
+```python
+Sorted = df.sort_values(['col'], ascending=False)
+```
+
+```python
+df_data.drop(df_data.index[idx0:], inplace=True)
 ```
 
 ## Plotting

@@ -166,6 +166,8 @@ class Cat:
 cat = Cat('David', 'black')
 ```
 
+* Methods & variables that start with '_' are not exported
+
 ## Little Tricks
 ```python
 print('Python version ' + sys.version) # prints the python version
