@@ -95,12 +95,23 @@ xmlhttp.onload = function(result) {
 
 </script>
 
-My name is Qinye Li /\*pronounced Chin-yeah\*/, or you can also call me Sindy if that is easier to remember. I‘ve just graduated with a bachelor degree in CS from University of Michigan -- Ann Arbor in April. I am also expecting a bachelor degree in ECE from Shanghai Jiao Tong University this August. I am now back in Shanghai working for my capstone project.
+My name is Qinye Li /\*pronounced Chin-yeah\*/, but `alias Qinye="Sindy"` if that is easier to remember. I am now a Software Engineer @ Google.
+I graduated with a bachelor degree in CS from University of Michigan and a bachelor degree in ECE from Shanghai Jiao Tong University.
 
-I speak Chinese, Japanese, English, and a little little little bit of French. Oh, I mean `C/C++` is my mother-tongue, but I also speak `Java`, `Python`, `JavaScript`, `Swift`. I am also learning `Go`!
+I speak Chinese, Japanese, English, and a little little little bit of French. Oh, I mean `C/C++` is my mother-tongue, but I also speak `Java`, `Python`, `Go` and `C#` (but not `.net`).
 
-I am hacking with Unity and `C#` recently!  
-Check out my latest game ; ) --> [GuruGuru](/GuruGuru/index.html)
+---
+
+I am into building games these days, and I would really like to invite you to check out my games!
+
+A 2D platforming puzzle game originally developed for my capstone class --> [GuruGuru](/GuruGuru/)
+
+A little 2D platformer developed for [Yifan](https://github.com/haoyifan)'s birthday. --> [Evan's Adventure](/evan_advenure/)
+
+You want to know the secret? It always hides in the `Shift` ; )
+Feel free to send me any feedback at `qinyeli` `@` `umich.edu`
+
+Cheers.
 
 <!--I like programming, becuase it makes me peaceful yet excited, desperate yet hopeful. It is sometimes frustrating, but I enjoy the process of being frustrated so much that I cannot give up.-->
 
