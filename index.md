@@ -106,7 +106,7 @@ I am into building games these days, and I would really like to invite you to ch
 
 A 2D platforming puzzle game originally developed for my capstone class --> [GuruGuru](/GuruGuru/)
 
-A little 2D platformer developed for [Yifan](https://github.com/haoyifan)'s birthday. --> [Evan's Adventure](/evan_advenure/)
+A little 2D platformer developed for [Yifan](https://github.com/haoyifan)'s birthday. --> [Evan's Adventure](/evan_adventure/)
 
 You want to know the secret? It always hides in the `Shift` ; )
 Feel free to send me any feedback at `qinyeli` `@` `umich.edu`
