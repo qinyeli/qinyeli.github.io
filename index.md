@@ -51,7 +51,7 @@ var es = new Greeting(
 
 // Set the greeting language according to the visitor's location
 var xmlhttp = new XMLHttpRequest();
-xmlhttp.open('GET', 'http://freegeoip.net/json/', true);
+xmlhttp.open('GET', 'http://api.ipstack.com/check?access_key=3ff441fa55eadf2af90848b0ee2fa4b7', true);
 xmlhttp.send();
 xmlhttp.onload = function(result) {
 	var obj = JSON.parse(result.currentTarget.response);
@@ -95,25 +95,10 @@ xmlhttp.onload = function(result) {
 
 </script>
 
-My name is Qinye Li /\*pronounced Chin-yeah\*/, but `alias Qinye="Sindy"` if that is easier to remember. I am now a Software Engineer @ Google.
-I graduated with a bachelor degree in CS from University of Michigan and a bachelor degree in ECE from Shanghai Jiao Tong University.
+My name is Qinye Li  `/*pronounced Chin-yeah*/`. I also go by the alias Sindy, which I "strongly" prefer over getting called Kin-Yee. I graduated from the University of Michigan and Shanghai Jiao Tong University and I am currently a software engineer @ Google.
 
-I speak Chinese, Japanese, English, and a little little little bit of French. Oh, I mean `C/C++` is my mother-tongue, but I also speak `Java`, `Python`, `Go` and `C#` (but not `.net`).
+I am recently into classical guitar, doodling with adobe illustrator (check out the [WeChat sticker](https://sticker.weixin.qq.com/cgi-bin/mmemoticon-bin/emoticonview?oper=single&t=shop/detail&productid=aL2PCfwK/89qO7sF6/+I+UDhfwEjhec2ZNvdnLLJRd/MDUss2D8iOYodg8M6Px++vgxzL/nUagZfRWxD++0BMEoYRDc/Q7pgzu7325y0IDuo=) I created 🤗), writing [Japanese songs](https://www.youtube.com/watch?v=icDdfQUT7e0&feature=youtu.be), music theory, psychology, French101, linguistics, checking off my [bucket list](https://github.com/qinyeli/bucket_list), and probably other random stuff by the time you read this.
 
----
-
-I am into building games these days, and I would really like to invite you to check out my games!
-
-A 2D platforming puzzle game originally developed for my capstone class --> [GuruGuru](/GuruGuru/)
-
-A little 2D platformer developed for [Yifan](https://github.com/haoyifan)'s birthday. --> [Evan's Adventure](/evan_adventure/)
-
-You want to know the secret? It always hides in the `Shift` ; )
-Feel free to send me any feedback at `qinyeli` `@` `umich.edu`
+I am a 30% geek, and I hack sometimes. If you happen to like platformer games, which I would arrogantly assume that you do 😉, check out this 2D platforming puzzle game, [GuruGuru](/GuruGuru/), which was originally developed for my capstone class, and this little dummy 2D platformer I developed for a friend's birthday [Evan's Adventure](/evan_adventure/)!
 
 Cheers.
-
-<!--I like programming, becuase it makes me peaceful yet excited, desperate yet hopeful. It is sometimes frustrating, but I enjoy the process of being frustrated so much that I cannot give up.-->
-
-
-<BR>&nbsp;<BR> 
